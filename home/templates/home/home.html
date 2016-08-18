@@ -1,0 +1,14 @@
+{% extends "home/header.html" %}
+{% block header_block %}
+<script>
+	tinymce.init({
+		selector: '#mytextarea'
+	});
+</script>
+{% endblock %}
+{% block content %}
+	<h1> Boring Man Ladder Hop</h1>
+	<p>Where you will find all your boring man needs</p>
+	<form method="post">
+		<textarea id="mytextarea">Hello, world!</textarea></form>
+{% endblock %}

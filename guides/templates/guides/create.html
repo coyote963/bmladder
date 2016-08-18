@@ -1,0 +1,18 @@
+{% extends "home/header.html" %}
+{% block headercontent %}
+<script>
+	tinymce.init({
+		selector: "#id_content",
+		plugins : "image",
+	})
+</script>
+{% endblock %}
+{% block content %}
+<h1>Add a new guide</h1>
+ 	<form id="guide_form" method="post" action="/guides/create/"
+					enctype="multipart/form-data">
+		{% csrf_token %}
+		{{guide_form.as_p}}
+		<input type="submit" name="submit" value="create!" />
+	</form>
+{% endblock %}

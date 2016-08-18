@@ -1,0 +1,16 @@
+{% extends "home/header.html" %}
+{% block content %}
+	<h1>Create A Tournament</h1>
+    <form id="tournament_form" method="post" action="/ladder/createtournament/"
+            enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {{ tournament_form.as_p }}
+
+
+        <!-- Provide a button to click to submit the form. -->
+    <input type="submit" name="submit" value="Register" />
+    </form>
+        
+{% endblock %}

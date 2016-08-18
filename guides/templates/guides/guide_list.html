@@ -1,0 +1,10 @@
+{% extends "home/header.html" %}
+{% block content %}
+<ul>
+	{% for guide in guide_list %}
+		<li>
+		<h><a href="/guides/{{ guide.id }}/">{{guide.title}}</a></h>
+		<p>{{guide.teaser}}</p>
+		</li>
+	{% endfor %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "home/header.html" %}
+{% block content %}
+	<h1>{{tournament.title}}</h1>
+	<p>{{tournament.date_created}}</p>
+
+	{% if in_tournament %}
+		<p> You are already in the tournament</p>
+	{% else %}
+		{% if is_logged_in %}
+			<p><a href= "/login/"></a>Login To Join Tournament</p>
+		{% else %}
+			<form method="post" action="">
+				{% csrf_token %}
+				<button>Join Tournament!</button>
+				<p> You are not in the tournament </p>
+			</form>
+		{% endif %}
+	{% endif %}
+	
+	<hr>
+	<ol>
+	{% for Participant in players_ranked %}
+	<li><a href= "/player/user/{{Participant.user.username}}">{{Participant.user.username}}</a>{{Participant.user.ingamename}}</li>
+	{% endfor %}
+    <ol>
+{% endblock %}

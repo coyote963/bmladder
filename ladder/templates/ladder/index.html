@@ -1,0 +1,12 @@
+{% extends "home/header.html" %}
+{% block content %}
+	<h1>Boring Man Tournaments</h1>
+	<hr>
+	<ul>
+	{% for tournament in tournament_list %}
+	
+	<li><a href= "/ladder/tournament/{{tournament.pk}}"><h3>{{tournament.title}}</h3>
+	<p>{{tournament.date_created}}</p></li>
+	{% endfor %}
+    <ul>    
+{% endblock %}

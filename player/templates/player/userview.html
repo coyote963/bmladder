@@ -1,0 +1,9 @@
+{% extends "home/header.html" %}
+
+{% block content %}
+<h1>{{ user.username }}</h1>
+<p>{{ user.player.ingamename }}</p>
+{% load staticfiles %}
+<img src ="{{ user.player.avatar.url }}">
+
+{% endblock %}

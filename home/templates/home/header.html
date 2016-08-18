@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Boring Man Ladder Hop</title>
+	<meta charset="utf-8" />
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}" type = "text/css"/>
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	<script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+	{% block headercontent %}
+	{% endblock %}
+	<style type="text/css">
+		html,
+		body {
+		  height:100%
+		}
+	</style>
+</head>
+
+<body class="body" style="background-color:#f6f6f6">
+	<div class="container-fluid" style="min-height:95%; ">
+		<div class="row">
+			<div class="col-sm-2">
+				<br>
+				<center>
+					<a href='/'><img src="{% static 'home/img/boringman.PNG' %}" class="responsive-img" style='max-height:100px;' alt="face1"></a>
+				</center>
+			</div>
+			<div class="col-sm-10">
+				<br>
+				<center>
+				<h3>Boring Man: Ladder Hop</h3>
+				</center>
+			</div>
+		</div><hr>
+		<div class="row">
+		  <div class="col-sm-2">
+		  <br>
+
+		  <br>
+		   <!-- Great, til you resize. -->
+			<!--<div class="well bs-sidebar affix" id="sidebar" style="background-color:#fff">-->
+			<div class="well bs-sidebar" id="sidebar" style="background-color:#fff">
+			  <ul class="nav nav-pills nav-stacked">
+				<li><a href='/'>Home</a></li>
+				<li><a href='/blog/'>My Blog</a></li>
+				<li><a href='/guides/'>Boring Man Guide</a></li>
+				<li><a href='/ladder/'>Ladder Tournament</a></li>
+				{% if not user.is_authenticated %}
+				<li><a href='/login/'>Login</a></li>
+				{% else %}
+				<li><a href='/logout'>Logout</a></li>
+				{% endif %}
+				<li><a href="/player/register/">Register</a></li>
+			  </ul>
+			</div> <!--well bs-sidebar affix-->
+		  </div> <!--col-sm-2-->
+		  <div class="col-sm-10">
+			  {% if user.is_authenticated %}
+				<div class="container">
+					<h3> Hello, {{user.username}}</h3>
+					<ul class="nav nav-pills">
+						<li><a href="/messages/">Mail</a></li>
+						<li><a href="/messages/compose">Compose</a></li>
+						<li><a href="/player/user/{{user.username}}">My Profile</a></li>
+						<li><a href="/blog/post/new">Create a blog post</a></li>
+						<li><a href="/guides/create">Add a Guide</a></li>
+					</ul>
+				</div><hr>
+				{% endif %}
+			<div class='container-fluid'>
+			<br><br>
+			   {% block content %}
+			   {% endblock %}	
+			</div>
+		  </div>
+		</div> 
+	</div>
+	<footer>
+		<div class="container-fluid" style='margin-left:15px'>
+			<p><a href="#" target="blank">Contact</a> | <a href="#" target="blank">LinkedIn</a> | <a href="#" target="blank">Twitter</a> | <a href="#" target="blank">Google+</a></p>
+		</div>
+	</footer>	
+	
+</body>
+
+</html>
