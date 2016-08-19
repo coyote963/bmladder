@@ -4,14 +4,14 @@
 	<p>{{tournament.date_created}}</p>
 
 	{% if in_tournament %}
-		<p> You are already in the tournament</p>
+		<p> You are already in the tournament :(</p>
 	{% else %}
 		{% if is_logged_in %}
 			<p><a href= "/login/"></a>Login To Join Tournament</p>
 		{% else %}
 			<form method="post" action="">
 				{% csrf_token %}
-				<button>Join Tournament!</button>
+				<button>Join Tournament!!</button>
 				<p> You are not in the tournament </p>
 			</form>
 		{% endif %}
