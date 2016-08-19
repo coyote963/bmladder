@@ -5,11 +5,10 @@
         {% if registered %}
         <strong>thank you for registering!</strong>
         {% else %}
-        Rango says: <strong>register here!</strong><br />
+        <strong>register here!</strong><br />
 
         <form id="user_form" method="post" action="/player/register/"
                 enctype="multipart/form-data">
-
             {% csrf_token %}
 
             <!-- Display each form. The as_p method wraps each element in a paragraph

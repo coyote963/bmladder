@@ -2,7 +2,9 @@ from player.forms import UserForm,PlayerForm
 from django.template import RequestContext
 from django.shortcuts import render_to_response, Http404, render,get_object_or_404
 from models import User
+from django.views.decorators.csrf import ensure_csrf_cookie
 
+@ensure_csrf_cookie
 def register(request):
     context = RequestContext(request)
     registered = False
@@ -28,7 +30,7 @@ def register(request):
     else:
         user_form = UserForm()
         player_form = PlayerForm()
-    return render_to_response(
+    return render(request,
         'player/register.html',
         {'user_form':user_form, 'player_form':player_form,'registered':registered},
         context)
