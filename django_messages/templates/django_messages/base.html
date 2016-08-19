@@ -1,6 +1,7 @@
 {% extends "home/header.html" %}
 {% load i18n %}
 {% block content %}
+{% block content1 %}
 {% endblock %}
 {% block sidebar %}
 <ul class="subnavilist">
@@ -9,4 +10,5 @@
     <li><a href="{% url 'messages_compose' %} ">&raquo;&nbsp;{% trans "New Message" %}</a></li>
     <li><a href="{% url 'messages_trash' %} ">&raquo;&nbsp;{% trans "Trash" %}</a></li>
 </ul>
+{% endblock %}
 {% endblock %}
