@@ -35,8 +35,7 @@ class detail(DetailView):
 			else:
 				context['in_tournament'] = False
 				context['is_logged_in'] = True
-			return context
-
+		return context
 
 # Create your views here.
 def createtournament(request):
