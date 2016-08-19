@@ -30,7 +30,7 @@ class detail(DetailView):
 			context['in_tournament'] = True
 		else:
 			context['in_tournament'] = False
-		context['self.request'] = request
+		context['self.request'] = self.request
 		return context
 
 # Create your views here.
