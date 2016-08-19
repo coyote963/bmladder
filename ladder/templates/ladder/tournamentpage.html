@@ -6,7 +6,7 @@
 	{% if in_tournament %}
 		<p> You are already in the tournament :(</p>
 	{% else %}
-		{% if is_logged_in %}
+		{% if not request.user.is_authenticated %}
 			<p><a href= "/login/"></a>Login To Join Tournament</p>
 		{% else %}
 			<form method="post" action="">

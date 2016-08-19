@@ -25,16 +25,12 @@ class detail(DetailView):
 		object = super(detail, self).get_object()
 		rankinglist = object.participants.all().order_by('ranking')
 		context['players_ranked'] = rankinglist
-		if self.request.user.is_anonymous():
-			context['is_logged_in'] = False
-			context['in_tournament'] = False
+
+		if object.participants.all().filter(user = self.request.user).exists():
+			context['in_tournament'] = True
 		else:
-			if object.participants.all().filter(user = self.request.user).exists():
-				context['in_tournament'] = True
-				context['is_logged_in'] = True
-			else:
-				context['in_tournament'] = False
-				context['is_logged_in'] = True
+			context['in_tournament'] = False
+		context['self.request'] = request
 		return context
 
 # Create your views here.
