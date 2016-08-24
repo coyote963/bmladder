@@ -1,18 +1,22 @@
 {% extends "home/header.html" %}
+{% load i18n %}
 {% block headercontent %}
+{{guide_form.media}}
 <script>
-	tinymce.init({
-		selector: "#id_content",
-		plugins : "image",
-	})
+tinyMCE.init({
+  mode: "textareas", 
+  
+});
 </script>
-{% endblock %}
+{% endblock %} 
+
 {% block content %}
-<h1>Add a new guide</h1>
- 	<form id="guide_form" method="post" action="/guides/create/"
-					enctype="multipart/form-data">
-		{% csrf_token %}
-		{{guide_form.as_p}}
-		<input type="submit" name="submit" value="create!" />
-	</form>
+<h1>Add a new guide!</h1>
+<form method="post" action="" 
+	enctype="multipart/form-data">
+{% csrf_token %}
+{{guide_form.as_p}}
+<input type="submit" value="create!"/>
+</form>
+
 {% endblock %}

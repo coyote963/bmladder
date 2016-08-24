@@ -1,11 +1,12 @@
 from django.shortcuts import render, render_to_response
-from ladder.forms import TournamentForm
+from ladder.forms import TournamentForm, CommentForm
 from django.template import RequestContext
 from ladder.models import Tournament,Participant
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from datetime import datetime
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
+
 class index(ListView):
 	model = Tournament
 	template_name = 'ladder/index.html'
@@ -47,9 +48,22 @@ def createtournament(request):
 			print tournament_form.errors
 	else:
 		tournament_form = TournamentForm()
-	return render_to_response(
+	return render(request,
 		'ladder/createtournament.html',
 		{'tournament_form':tournament_form},
-		context
 		)
-
+def add_comment_to_post(request, pk):
+    tournament = get_object_or_404(Tournament, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.tournament = tournament
+            new_comment.save()
+            return redirect('detail', pk)
+    else:
+        form = CommentForm()
+    return render(request, 
+    	'ladder/add_comment_to_post.html',
+    	{'form': form},
+    	)

@@ -1,0 +1,10 @@
+{% extends "home/header.html" %}
+{% block content %}
+	<h1>Create a clan!</h1>
+	<form method="post" action=""
+		enctype="multipart/form-data">
+	{% csrf_token %}
+	{{clan_form.as_p}}
+	<input type="submit" value="create!"/>
+	</form>
+{% endblock %}

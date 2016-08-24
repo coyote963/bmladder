@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
 urlpatterns = [
     url(r'^$',views.guidelist.as_view(),name='guidelist'),
     url(r'^(?P<pk>[0-9]+)/$', views.guidedetail.as_view(), name = 'detail'),
     # url(r'^(?P<guide_id>[\d]+)/edit/$', guideedit, name = 'guideedit'),
     url(r'^create/$',views.guidecreate, name = 'guidecreate'),
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

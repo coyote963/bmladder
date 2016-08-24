@@ -30,4 +30,7 @@ urlpatterns = [
     url(r'^player/',include('player.urls')),
     url(r'^messages/', include('django_messages.urls')),
     url(r'^ladder/',include('ladder.urls')),
+    url(r'^clans/',include('clans.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -35,8 +35,12 @@ INSTALLED_APPS = [
     'guides',
     'home',
     'tinymce',
+    'ckeditor',
+    'redactor',
+	'ckeditor_uploader',    
     'player',
     'ladder',
+    'clans',
     'django.contrib.sites',
     'django_messages',
     'django.contrib.admin',
@@ -47,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 SITE_ID = 1
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,9 +132,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = '/var/www/example.com/static/'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
 LOGIN_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+REDACTOR_OPTIONS = {'lang': 'en'}
+
+REDACTOR_UPLOAD = 'uploads/'

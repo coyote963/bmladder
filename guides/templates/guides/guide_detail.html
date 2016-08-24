@@ -1,7 +1,7 @@
 {% extends "home/header.html" %}
 {% block content %}
 
-	<div><img src="{{ guide.banner.url }}"></div>	
+	<img src="{{ guide.banner.url }}">	
 	<h1>{{guide.title}}</h1>
 	<h3>{{guide.teaser}} written by <a href="/player/user/{{guide.user.username}}">{{guide.user.player.ingamename}}</a> on {{guide.date }}</h3>
 	{{guide.content|safe|linebreaks }}

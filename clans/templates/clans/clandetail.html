@@ -1,0 +1,23 @@
+{% extends "home/header.html" %}
+{% block content %}
+	<img src = "{{clan.image.url}}">
+	<h1>{{clan.title}}</h1>
+	<p>[{{clan.clantag}}]</p>
+	<p><bold>Clan Description:</bold>{{clan.description}}</p>
+	<a href="{% url 'clanjoin' clan.slug %}">Enter this clan</a>
+	<p>Members</p>
+	{% for Player in members %}
+	<li><b>[{{clan.clantag}}] {{Player.ingamename}}</b></li>
+	{% endfor %}
+	<p>Wall</p>
+	<form method="post" action=""
+		enctype="multipart/form-data">
+	{% csrf_token %}
+	{{comment_form.as_p}}
+	<input type="submit" value="post comment"/>
+	</form>
+	{% for Comment in comments %}
+	<p>{{Comment.author.username}}:		{{Comment.content}}</p>
+	{% endfor %}
+	<p><a href="{% url 'clanupdate' clan.slug %}">Edit</a></p>
+{% endblock %}

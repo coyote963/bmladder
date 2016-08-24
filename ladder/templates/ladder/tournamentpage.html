@@ -23,4 +23,15 @@
 	<li><a href= "/player/user/{{Participant.user.username}}">{{Participant.user.username}}</a>{{Participant.user.ingamename}}</li>
 	{% endfor %}
     <ol>
+    <hr>
+    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=tournament.pk %}">Add comment</a>
+	{% for comment in tournament.comments.all %}
+	    <div class="comment">
+	        <div class="date">{{ comment.created_date }}</div>
+	        <strong>{{ comment.author }}</strong>
+	        <p>{{ comment.text|linebreaks }}</p>
+	    </div>
+	{% empty %}
+	    <p>No comments here yet :(</p>
+	{% endfor %}
 {% endblock %}

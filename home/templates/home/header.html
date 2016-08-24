@@ -7,7 +7,6 @@
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}" type = "text/css"/>
 	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
-	<script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
 	{% block headercontent %}
 	{% endblock %}
 	<style type="text/css">
@@ -66,6 +65,7 @@
 						<li><a href="/player/user/{{user.username}}">My Profile</a></li>
 						<li><a href="/blog/post/new">Create a blog post</a></li>
 						<li><a href="/guides/create">Add a Guide</a></li>
+						<li><a href="/clans/createclan">Create a clan</a></li>
 					</ul>
 				</div><hr>
 				{% endif %}
@@ -79,10 +79,9 @@
 	</div>
 	<footer>
 		<div class="container-fluid" style='margin-left:15px'>
-			<p><a href="#" target="blank">Contact</a> | <a href="#" target="blank">LinkedIn</a> | <a href="#" target="blank">Twitter</a> | <a href="#" target="blank">Google+</a></p>
+			<p><a href="http://coyote-and-bird.tumblr.com/" target="blank">Tumblr</a> | <a href="https://twitter.com/CoyoteAndBird1" target="blank">Twitter</a> | <a href="https://plus.google.com/u/3/114696565784178147243/posts" target="blank">Google+</a></p>
 		</div>
 	</footer>	
 	
 </body>
-
 </html>
