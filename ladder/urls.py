@@ -20,8 +20,8 @@ from . import views
 urlpatterns = [
     url(r'^tournament/(?P<pk>[0-9]+)/$', views.detail.as_view(), name ='detail'),
     url(r'^$', views.index.as_view(), name='index'), 
-    # url(r'^tournament/match-history/(?P<id>[0-9]+)/$',views.match-history, name='match-history'),
-    # url(r'^tournament/reportmatch/(?P<id>[0-9]+)/$', views.reportmatch, name='reportmatch'),
+    url(r'^tournament/match-history/(?P<pk>[0-9]+)/$',views.matchhistory, name='matchhistory'),
+    url(r'^tournament/reportmatch/(?P<pk>[0-9]+)/$', views.reportmatch, name='reportmatch'),
     url(r'^createtournament/$', views.createtournament, name='createtournament'),
     url(r'^post/(?P<pk>[0-9]+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
 ]

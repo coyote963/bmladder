@@ -1,16 +1,20 @@
 from django.shortcuts import render, render_to_response
 from ladder.forms import TournamentForm, CommentForm
 from django.template import RequestContext
-from ladder.models import Tournament,Participant
+from ladder.models import Tournament,Participant,Match
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from datetime import datetime
 from django.shortcuts import redirect, get_object_or_404
-
+from player.models import Player
 class index(ListView):
 	model = Tournament
 	template_name = 'ladder/index.html'
-
+def matchhistory(request, pk):
+	tournament = get_object_or_404(Tournament, pk = pk)
+	return render(request,
+		'ladder/matchhistory.html',
+		{'matchlist': tournament.match_set.all()})
 class detail(DetailView):
 	def post(self, request, *args, **kwargs):
 		object = super(detail, self).get_object()
@@ -67,3 +71,69 @@ def add_comment_to_post(request, pk):
     	'ladder/add_comment_to_post.html',
     	{'form': form},
     	)
+def reportmatch(request, pk):
+	tournament = get_object_or_404(Tournament, pk = pk)
+	try:
+		player1 = tournament.participants.get(pk=request.POST['player1'])
+		player2 = tournament.participants.get(pk = request.POST['player2'])
+
+		score1 = request.POST['score1']
+		score2 = request.POST['score2']
+	except (KeyError, Participant.DoesNotExist):
+
+		return render(request,'ladder/reportmatch.html', {
+			'tournament' : tournament,
+			'error_message':"Pick two players",
+		})
+	else:
+		player1.latest_activity = datetime.now()
+		player2.latest_activity = datetime.now()
+		if player1.ranking > player2.ranking: #player1 is lower ranked player
+			if score1 >= score2: #upset occured
+				player2.latest_loss = datetime.now()
+				switch(player1,player2)
+				match = Match(tournament = tournament,
+					date = datetime.now(), 
+					winner = player1, loser = player2,
+					score_winner = score1, score_loser = score2)
+				match.save()
+				match.winner.add(player1)
+				match.loser.add(player2)
+			else:
+				player1.latest_loss = datetime.now()
+				match = Match(tournament = tournament, 
+					date = datetime.now(), 
+					winner = player2, loser = player1,
+					score_winner = score2, score_loser = score1)
+				match.save()
+				match.winner.add(player2)
+				match.loser.add(player1)
+
+		else: #player1 is better ranked than player2
+			if score2 > score1:
+				player1.latest_loss = datetime.now()
+				switch(player1 = player1, player2 = player2)
+				match= Match(score_loser = score1, score_winner = score2, 
+					winner = player2, loser = player1, 
+					tournament = tournament)
+				match.save()
+	
+			else:#score1 > score2
+				player2.latest_loss = datetime.now()
+				match = Match(tournament = tournament,
+					date = datetime.now(), 
+					score_winner = score1, score_loser = score2,
+					winner = player1, loser = player2)
+				match.save()
+				
+		match.save()
+		return redirect('detail', pk)
+def switch(player1, player2):
+	temp = player2.ranking
+	player2.ranking = player1.ranking
+	player1.ranking = -1
+	player1.save()
+	player2.save()
+	player1.ranking = temp
+	player1.save()
+

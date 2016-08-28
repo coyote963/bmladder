@@ -18,9 +18,10 @@
 	{% endif %}
 	
 	<hr>
-	<ol>
+
+	<ul>
 	{% for Participant in players_ranked %}
-	<li><a href= "/player/user/{{Participant.user.username}}">{{Participant.user.username}}</a>{{Participant.user.ingamename}}</li>
+	<li><a href= "/player/user/{{Participant.user.username}}">{{Participant.ranking}}. {{Participant.user.username}}</a>{{Participant.user.ingamename}}</li>
 	{% endfor %}
     <ol>
     <hr>
@@ -34,4 +35,5 @@
 	{% empty %}
 	    <p>No comments here yet :(</p>
 	{% endfor %}
+	<a class = "btn btn-default" href="{% url 'reportmatch' pk=tournament.pk %}">[Report a match]</a><a class="btn btn-default" href="{% url 'matchhistory' pk=tournament.pk %}">[View Match History]</a>
 {% endblock %}

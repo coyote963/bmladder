@@ -8,7 +8,8 @@ class Participant(models.Model):
 	latest_loss = models.DateTimeField(blank = True, null = True)
 	latest_activity = models.DateTimeField()
 	ranking = models.IntegerField(unique=True)
-
+	class Meta:
+		ordering=["ranking"]
 # Create your models here.
 class Tournament(models.Model):
 	capacity = models.IntegerField()
@@ -23,7 +24,15 @@ class Tournament(models.Model):
 		ordering=["-date_created"]
 	def __str__(self):
 		return self.title
-
+class Match(models.Model):
+	tournament = models.ForeignKey(Tournament)
+	winner = models.OneToOneField(Participant, related_name="match_winner", null=True)
+	loser = models.OneToOneField(Participant, related_name="match_loser", null=True)
+	date = models.DateTimeField(default=datetime.now)
+	score_winner = models.IntegerField()
+	score_loser = models.IntegerField()
+	class Meta:
+		ordering=["-date"]
 class Comment(models.Model):
     tournament = models.ForeignKey('ladder.Tournament', related_name='comments')
     author = models.CharField(max_length=200)

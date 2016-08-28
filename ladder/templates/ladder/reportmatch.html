@@ -1,0 +1,29 @@
+{% extends "home/header.html" %}
+{% block headercontent %}
+
+{% endblock %}
+{% block content %}
+	<h1>Report a match</h1>
+
+    <form id="tournament_form" method="post" action=""
+            enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-md-6">
+    	{% for participant in tournament.participants.all %}
+    	<input type="radio" name="player1" id="participant{{ forloop.counter }}" value="{{ participant.pk }}" />
+    	<label for="participant{{ forloop.counter }}">{% if participant.user.player.clan.clantag %}[{{participant.user.player.clan.clantag}}]{% endif %} {{participant.user.player.ingamename}}-{{participant.user.username}}</label><br />
+    	
+    	{% endfor %}
+    	<input type="number" name="score1" min="0" max="10">
+    	</div>
+    	<div class="col-md-6">
+        {% for participant in tournament.participants.all %}
+    	<input type="radio" name="player2" id="participant{{ forloop.counter }}" value="{{ participant.pk }}" />
+    	<label for="participant{{ forloop.counter }}">{% if participant.user.player.clan.clantag %}[{{participant.user.player.clan.clantag}}]{% endif %} {{participant.user.player.ingamename}}-{{participant.user.username}}</label><br />
+    	{% endfor %}
+    	<input type="number" name="score2" min="0" max="10">
+    	</div>
+    <input type="submit" value="Report" />
+    </form>
+        
+{% endblock %}

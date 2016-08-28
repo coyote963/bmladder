@@ -1,0 +1,24 @@
+{% extends "home/header.html" %}
+{% block content %}
+	<h1>Match History</h1>
+	<hr>
+	<ul>
+	<table style="width:100%">
+	<tr>
+		<th>Winner</th>
+		<th>Winner Score</th>
+		<th>Loser Score</th>
+		<th>Loser</th>
+		<th>Date</th>
+		{% for match in matchlist %}
+		<tr>
+			<td>{{match.winner.user.player.ingamename}}</td>
+			<td> {{match.score_winner}}</td> 
+			<td> {{match.score_loser}}</td>
+			<td>{{match.loser.user.player.ingamename}}</td>
+			<td>{{match.date}}</td>
+		</td>
+		{% endfor %}
+		
+    </table>
+{% endblock %}
