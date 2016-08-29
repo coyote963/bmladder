@@ -14,7 +14,17 @@
 		body {
 		  height:100%
 		}
+
 	</style>
+	
+	{{guide_form.media}}
+	<script>
+	tinyMCE.init({
+	  mode: "textareas", 
+	  
+	});
+	</script>
+
 </head>
 
 <body class="body" style="background-color:#f6f6f6">
@@ -45,6 +55,7 @@
 				<li><a href='/'>Home</a></li>
 				<li><a href='/blog/'>My Blog</a></li>
 				<li><a href='/guides/'>Boring Man Guide</a></li>
+				<li><a href='/clans/'>Clans</a></li>
 				<li><a href='/ladder/'>Ladder Tournament</a></li>
 				{% if not user.is_authenticated %}
 				<li><a href='/login/'>Login</a></li>
@@ -52,6 +63,7 @@
 				<li><a href='/logout'>Logout</a></li>
 				{% endif %}
 				<li><a href="/player/register/">Register</a></li>
+
 			  </ul>
 			</div> <!--well bs-sidebar affix-->
 		  </div> <!--col-sm-2-->
@@ -60,12 +72,14 @@
 				<div class="container">
 					<h3> Hello, {{user.username}}</h3>
 					<ul class="nav nav-pills">
-						<li><a href="/messages/">Mail</a></li>
+						{% load inbox %}
+						<li><a href="/messages/">Mail: {% inbox_count %} New</a></li>
 						<li><a href="/messages/compose">Compose</a></li>
 						<li><a href="/player/user/{{user.username}}">My Profile</a></li>
 						<li><a href="/blog/post/new">Create a blog post</a></li>
 						<li><a href="/guides/create">Add a Guide</a></li>
 						<li><a href="/clans/createclan">Create a clan</a></li>
+						<li><a href="/ladder/createtournament">Add Tournament</a></li>
 					</ul>
 				</div><hr>
 				{% endif %}

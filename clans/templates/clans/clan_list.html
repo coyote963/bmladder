@@ -1,0 +1,16 @@
+{% extends "home/header.html" %}
+
+{% block content %}
+	<a href = "{% url 'clancreate' %}">Create your own clan</a>
+	{% for clan in clan_list %}
+	<a href= "{% url 'clandetail' clan.slug %}">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			{{clan.title}} 
+		</div>
+		<div class="panel-footer">{{clan.description}}</div>
+	</div>
+	{% endfor %}
+	</a>
+{% endblock %}
+

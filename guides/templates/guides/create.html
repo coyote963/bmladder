@@ -1,5 +1,6 @@
 {% extends "home/header.html" %}
 {% load i18n %}
+
 {% block headercontent %}
 {{guide_form.media}}
 <script>
@@ -11,7 +12,7 @@ tinyMCE.init({
 {% endblock %} 
 
 {% block content %}
-<h1>Add a new guide!</h1>
+<h1>Add a new guide/acticle!</h1>
 <form method="post" action="" 
 	enctype="multipart/form-data">
 {% csrf_token %}

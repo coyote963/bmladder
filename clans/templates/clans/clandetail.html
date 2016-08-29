@@ -1,6 +1,8 @@
 {% extends "home/header.html" %}
 {% block content %}
+	{% if clan.image %}
 	<img src = "{{clan.image.url}}">
+	{% endif %}
 	<h1>{{clan.title}}</h1>
 	<p>[{{clan.clantag}}]</p>
 	<p><bold>Clan Description:</bold>{{clan.description}}</p>

@@ -9,7 +9,11 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required, permission_required
+
 # Create your views here.
+@login_required
+@permission_required('guides.can_add_guide',raise_exception=True)
 def guidecreate(request):
 	context = RequestContext(request)
 	if request.method == 'POST':

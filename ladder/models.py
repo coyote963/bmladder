@@ -8,6 +8,7 @@ class Participant(models.Model):
 	latest_loss = models.DateTimeField(blank = True, null = True)
 	latest_activity = models.DateTimeField()
 	ranking = models.IntegerField(unique=True)
+	
 	class Meta:
 		ordering=["ranking"]
 # Create your models here.
@@ -39,10 +40,12 @@ class Comment(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
-
+    def __str__(self):
+    	return self.text
     def approve(self):
         self.approved_comment = True
         self.save()
-
+    class Meta:
+    	ordering=["-created_date"]
     def __str__(self):
         return self.text

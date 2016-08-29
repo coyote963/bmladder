@@ -6,7 +6,11 @@ from clans.models import Clan, Comment
 from player.models import Player
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView
+from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 # Create your views here.
+@login_required
 def clancreate(request):
 	context = RequestContext(request)
 	if request.method == 'POST':
@@ -25,6 +29,7 @@ def clancreate(request):
 		'clans/clancreate.html',
 		{'clan_form':clan_form},
 		context)
+@login_required
 def clandetail(request, slug):
 	clan = get_object_or_404(Clan, slug = slug)
 	members = Player.objects.filter(clan = clan)
@@ -43,7 +48,7 @@ def clandetail(request, slug):
 	return render(request,
 		'clans/clandetail.html',
 		{'clan':clan, 'members':members, 'comment_form':comment_form, 'comments':comments})
-
+@login_required
 def clanenter(request, slug):
 	clan = get_object_or_404(Clan, slug = slug)
 	error_message = ""
@@ -65,7 +70,11 @@ def clanenter(request, slug):
 		'clans/clanenter.html',
 		{'form':form,'clan':clan,'error_message':error_message}
 		)
-class ClanUpdate(UpdateView):
+class ClanList(ListView):
+	model = Clan
+	template_name_suffix = '_list'
+class ClanUpdate(PermissionRequiredMixin,UpdateView):
+	permission_required = 'clan.can_change_clan'
 	model = Clan
 	template_name_suffix = '_update_form'
 	fields = ['title','image','description','clantag']

@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'^clan/(?P<slug>\w{1,30})/$', views.clandetail, name='clandetail'),
 	url(r'^joinclan/(?P<slug>\w{1,30})/$',views.clanenter, name='clanjoin'),
 	url(r'^editclan/(?P<slug>\w+)/$', views.ClanUpdate.as_view(), name='clanupdate'),
+	url(r'^$', views.ClanList.as_view(), name="index")
 ]

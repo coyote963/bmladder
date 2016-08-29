@@ -19,9 +19,11 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 import django.contrib.auth.views 
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('home.urls')),
+    url(r'^accounts/login/$', auth_views.login),
     url(r'^login/$', django.contrib.auth.views.login),
     url(r'^logout/$',django.contrib.auth.views.logout), 
     url(r'^blog/',include('blog.urls')),

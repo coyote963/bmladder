@@ -3,8 +3,10 @@ from .forms import PostForm
 from django.utils import timezone
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
-# Create your views here.
+from django.contrib.auth.decorators import login_required, permission_required
 
+@login_required
+@permission_required('blog.can_add_post',raise_exception=True)
 def post_new(request):
 	if request.user.is_authenticated():
 		form = PostForm()

@@ -7,6 +7,9 @@ from django.views.generic.detail import DetailView
 from datetime import datetime
 from django.shortcuts import redirect, get_object_or_404
 from player.models import Player
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 class index(ListView):
 	model = Tournament
 	template_name = 'ladder/index.html'
@@ -16,6 +19,7 @@ def matchhistory(request, pk):
 		'ladder/matchhistory.html',
 		{'matchlist': tournament.match_set.all()})
 class detail(DetailView):
+	@login_required
 	def post(self, request, *args, **kwargs):
 		object = super(detail, self).get_object()
 		new_participant = Participant(user = request.user,latest_activity = datetime.now(), ranking = object.participants.count()+1)
@@ -30,15 +34,19 @@ class detail(DetailView):
 		object = super(detail, self).get_object()
 		rankinglist = object.participants.all().order_by('ranking')
 		context['players_ranked'] = rankinglist
-
-		if object.participants.all().filter(user = self.request.user).exists():
-			context['in_tournament'] = True
-		else:
-			context['in_tournament'] = False
+		try:
+			if object.participants.all().filter(user = self.request.user).exists():
+				context['in_tournament'] = True
+			else:
+				context['in_tournament'] = False
+		except:
+			context['in_tournament']= False
 		context['self.request'] = self.request
 		return context
 
 # Create your views here.
+@login_required
+@permission_required('ladder.can_add_tournament',raise_exception=True)
 def createtournament(request):
 	context = RequestContext(request)
 	if request.method == 'POST':
@@ -56,6 +64,7 @@ def createtournament(request):
 		'ladder/createtournament.html',
 		{'tournament_form':tournament_form},
 		)
+@login_required
 def add_comment_to_post(request, pk):
     tournament = get_object_or_404(Tournament, pk=pk)
     if request.method == "POST":
@@ -71,6 +80,8 @@ def add_comment_to_post(request, pk):
     	'ladder/add_comment_to_post.html',
     	{'form': form},
     	)
+@login_required
+@permission_required('ladder.can_change_tournament',raise_exception=True)
 def reportmatch(request, pk):
 	tournament = get_object_or_404(Tournament, pk = pk)
 	try:
