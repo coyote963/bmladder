@@ -19,7 +19,7 @@ def matchhistory(request, pk):
 		'ladder/matchhistory.html',
 		{'matchlist': tournament.match_set.all()})
 class detail(DetailView):
-	@login_required
+
 	def post(self, request, *args, **kwargs):
 		object = super(detail, self).get_object()
 		new_participant = Participant(user = request.user,latest_activity = datetime.now(), ranking = object.participants.count()+1)
@@ -55,7 +55,7 @@ def createtournament(request):
 		if tournament_form.is_valid():
 			tournament = tournament_form.save()
 			tournament.save()
-			return redirect('index')
+			return redirect('ladderindex')
 		else:
 			print tournament_form.errors
 	else:
@@ -136,7 +136,6 @@ def reportmatch(request, pk):
 					score_winner = score1, score_loser = score2,
 					winner = player1, loser = player2)
 				match.save()
-				
 		match.save()
 		return redirect('detail', pk)
 def switch(player1, player2):

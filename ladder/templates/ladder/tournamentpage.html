@@ -2,12 +2,12 @@
 {% block content %}
 	<h1>{{tournament.title}}</h1>
 	<p>{{tournament.date_created}}</p>
-	<p>{{tournament.rules}}</p>
+	{{tournament.rules|safe|linebreaks}}
 	{% if in_tournament %}
 		<p> You are already in the tournament :(</p>
 	{% else %}
 		{% if not request.user.is_authenticated %}
-			<p><a href= "/login/"></a>Login To Join Tournament</p>
+			<p><a href= "/login/">Login To Join Tournament</a></p>
 		{% else %}
 			<form method="post" action="">
 				{% csrf_token %}
@@ -18,19 +18,24 @@
 	{% endif %}
 	
 	<hr>
-
-	<ul>
+	{% load thumbnail %}
 	{% for Participant in players_ranked %}
-	<li><a href= "/player/user/{{Participant.user.username}}">{{Participant.ranking}}. {{Participant.user.username}}</a>{{Participant.user.ingamename}}</li>
+	<div class= "panel panel-default"><a href= "/player/user/{{Participant.user.username}}">
+	{% if Participant.user.player.avatar %}
+	<img style="vertical-align:middle" src="{% thumbnail Participant.user.player.avatar 50x50 crop='smart' %}"></a>
+	{% endif %}
+
+	<p style = 'display:inline'>{{Participant.ranking}}. {{Participant.user.username}} in-game :{{Participant.user.player.ingamename}}</p>
+	</div>
 	{% endfor %}
     <ol>
     <hr>
     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=tournament.pk %}">Add comment</a>
 	{% for comment in tournament.comments.all %}
-	    <div class="comment">
-	        <div class="date">{{ comment.created_date }}</div>
-	        <strong>{{ comment.author }}</strong>
-	        <p>{{ comment.text|linebreaks }}</p>
+	    <div class="panel panel-default">
+	        <p style='display:inline'><i>On {{ comment.created_date }}</i>
+	        <strong>{{ comment.author }}:</strong>
+	        {{ comment.text|linebreaks }}</p>
 	    </div>
 	{% empty %}
 	    <p>No comments here yet :(</p>

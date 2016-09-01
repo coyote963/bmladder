@@ -1,21 +1,20 @@
 {% extends "home/header.html" %}
+{% block headercontent %}
+
 <script>
-tinymce.init({
-		selector: '#id_body',
-		plugins: "image",
-    	image_list: [ 
-	        {title: 'My image 1', value: 'http://www.tinymce.com/my1.gif'}, 
-			{title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif'} 
-    ]
-	});
+tinyMCE.init({
+  mode: "textareas", 
+});
 </script>
+{{tournament_form.media}}
+</script>
+{% endblock %}
 {% block content %}
+
 	<h1>Create A Tournament</h1>
     <form id="tournament_form" method="post" action="/ladder/createtournament/"
             enctype="multipart/form-data">
-
     {% csrf_token %}
-
     {{ tournament_form.as_p }}
 
 

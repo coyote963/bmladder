@@ -19,7 +19,7 @@ from . import views
 
 urlpatterns = [
     url(r'^tournament/(?P<pk>[0-9]+)/$', views.detail.as_view(), name ='detail'),
-    url(r'^$', views.index.as_view(), name='index'), 
+    url(r'^$', views.index.as_view(), name='ladderindex'), 
     url(r'^tournament/match-history/(?P<pk>[0-9]+)/$',views.matchhistory, name='matchhistory'),
     url(r'^tournament/reportmatch/(?P<pk>[0-9]+)/$', views.reportmatch, name='reportmatch'),
     url(r'^createtournament/$', views.createtournament, name='createtournament'),

@@ -7,7 +7,7 @@ class Participant(models.Model):
 	user = models.ForeignKey(User)
 	latest_loss = models.DateTimeField(blank = True, null = True)
 	latest_activity = models.DateTimeField()
-	ranking = models.IntegerField(unique=True)
+	ranking = models.IntegerField()
 	
 	class Meta:
 		ordering=["ranking"]

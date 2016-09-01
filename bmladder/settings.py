@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'tinymce',
     'ckeditor',
     'redactor',
+    'oidc_provider',
+    'social.apps.django_app.default',
 	'ckeditor_uploader',    
     'player',
     'ladder',
     'clans',
+    'easy_thumbnails',
     'django.contrib.sites',
     'django_messages',
     'django.contrib.admin',
@@ -50,6 +53,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+AUTHENTICATION_BACKENDS = (
+    'social.backends.open_id.OpenIdAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
 SITE_ID = 1
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -147,3 +154,15 @@ CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.j
 REDACTOR_OPTIONS = {'lang': 'en'}
 
 REDACTOR_UPLOAD = 'uploads/'
+
+LOGIN_URL = '/accounts/login/'
+
+def userinfo(claims, user):
+
+    claims['name'] = '{0} {1}'.format(user.first_name, user.last_name)
+    claims['given_name'] = user.first_name
+    claims['family_name'] = user.last_name
+    claims['email'] = user.email
+    claims['address']['street_address'] = '...'
+
+    return claims
