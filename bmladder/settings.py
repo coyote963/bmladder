@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'tinymce',
     'ckeditor',
     'redactor',
-    'oidc_provider',
-    'social.apps.django_app.default',
 	'ckeditor_uploader',    
     'player',
     'ladder',
