@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'player',
     'ladder',
     'clans',
+    'social.apps.django_app.default',
     'easy_thumbnails',
     'django.contrib.sites',
     'django_messages',
@@ -51,9 +52,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+SOCIAL_AUTH_STEAM_API_KEY = '51A511E7B3DD3A47CC84A794581C452F'
 AUTHENTICATION_BACKENDS = (
+    'social.backends.steam.SteamOpenId',
     'django.contrib.auth.backends.ModelBackend',
 )
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+
+
+    'social.pipeline.social_auth.associate_user',
+    #'bmladder.save_profile.save_profile',
+    'social.pipeline.social_auth.load_extra_data',
+    'social_auth.backends.pipeline.user.update_user_details',
+
+
+)
+
 SITE_ID = 1
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

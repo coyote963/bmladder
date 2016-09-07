@@ -7,5 +7,6 @@ class Player(models.Model):
 	ingamename = models.CharField(max_length=25)
 	avatar = models.ImageField(upload_to='profile_images', blank=True)
 	clan = models.ForeignKey(Clan, blank=True, null=True)
+	steamid = models.IntegerField(blank=True, null=True)
 	def __unicode__(self):
 		return self.user.username
