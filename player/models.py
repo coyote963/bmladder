@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from clans.models import Clan
 
-class Player(models.Model):
+class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	ingamename = models.CharField(max_length=25)
 	avatar = models.ImageField(upload_to='profile_images', blank=True)

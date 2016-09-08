@@ -3,9 +3,9 @@
 {% block content %}
 
 <h1>{{ user.username }}</h1>
-<p>{{ user.player.ingamename }}</p>
+<p>{{ user.profile.ingamename }}</p>
 {% load staticfiles %}
-{% if user.player.avatar %}
-<img src="{{user.player.avatar.url}}"> 
+{% if user.profile.avatar %}
+<img src="{{user.profile.avatar.url}}"> 
 {% endif %}
 {% endblock %}

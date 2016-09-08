@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from player.models import Player
+from player.models import Profile
 
 class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput)
@@ -10,5 +10,5 @@ class UserForm(forms.ModelForm):
 
 class PlayerForm(forms.ModelForm):
 	class Meta:
-		model = Player
+		model = Profile
 		fields = ('ingamename','avatar')

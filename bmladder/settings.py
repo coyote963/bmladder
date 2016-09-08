@@ -59,13 +59,17 @@ AUTHENTICATION_BACKENDS = (
 )
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
-
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
 
     'social.pipeline.social_auth.associate_user',
-    #'bmladder.save_profile.save_profile',
+    
     'social.pipeline.social_auth.load_extra_data',
-    'social_auth.backends.pipeline.user.update_user_details',
-
+    'social.pipeline.user.user_details',
+    'bmladder.save_profile.save_profile',
 
 )
 
@@ -168,4 +172,3 @@ REDACTOR_OPTIONS = {'lang': 'en'}
 REDACTOR_UPLOAD = 'uploads/'
 
 LOGIN_URL = '/accounts/login/'
-

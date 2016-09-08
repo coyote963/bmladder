@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from clans.forms  import ClanForm,EntryForm,CommentForm
 from clans.models import Clan, Comment
-from player.models import Player
+from player.models import Profile
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView
 from django.views.generic import ListView

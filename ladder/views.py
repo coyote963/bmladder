@@ -6,7 +6,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from datetime import datetime
 from django.shortcuts import redirect, get_object_or_404
-from player.models import Player
+from player.models import Profile
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
