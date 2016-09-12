@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-
+from secrets import *
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g4vvccx#1wy-b(5^6y^=()cva3m=8#db=w#+9axtv=9(*grj=7'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-SOCIAL_AUTH_STEAM_API_KEY = '51A511E7B3DD3A47CC84A794581C452F'
 AUTHENTICATION_BACKENDS = (
     'social.backends.steam.SteamOpenId',
     'django.contrib.auth.backends.ModelBackend',
@@ -61,13 +60,10 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
     'social.pipeline.user.create_user',
-
     'social.pipeline.social_auth.associate_user',
-    
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
     'bmladder.save_profile.save_profile',
-
 )
 
 SITE_ID = 1
