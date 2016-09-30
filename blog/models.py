@@ -1,4 +1,6 @@
 from django.db import models
+from tinymce.widgets import TinyMCE
+from tinymce.models import HTMLField
 
 class Post(models.Model):
 	title = models.CharField(max_length=140)

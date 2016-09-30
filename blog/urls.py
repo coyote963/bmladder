@@ -1,5 +1,7 @@
 from django.conf.urls import url, include
 from django.views.generic import ListView, DetailView
+from django.conf.urls.static import static
+from django.conf import settings
 from blog.models import Post
 from . import views
 urlpatterns = [ 
@@ -11,4 +13,4 @@ urlpatterns = [
                                     model = Post,
                                     template_name="blog/post.html"), name='post_detail'),
                 url(r'^post/new/$', views.post_new, name='post_new'),
-			]
+			]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

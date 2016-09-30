@@ -1,20 +1,21 @@
 {% extends 'home/header.html' %}
 {% load i18n %}
 {% block headercontent %}
-
 {{form.media}}
-<script>
+<!-- <script>
 tinyMCE.init({
   mode: "textareas", 
 });
-</script>
+</script> -->
 
 {% endblock %}
 
 {% block content %}
 	<h1>New post</h1>
-	<form method="POST" class="post-form">{% csrf_token %}
-		{{ form.as_p }}
-		<button type="submit" class="save btn btn-default">Save</button>
+	<form method="post" action=""
+		enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type= "submit" value="create!"/>
 	</form>
 {% endblock %}
