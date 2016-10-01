@@ -32,7 +32,7 @@ def clancreate(request):
 @login_required
 def clandetail(request, slug):
 	clan = get_object_or_404(Clan, slug = slug)
-	members = Player.objects.filter(clan = clan)
+	members = Profile.objects.filter(clan = clan)
 	comments = Comment.objects.filter(clan = clan)
 	if request.method == 'POST':
 		comment_form = CommentForm(data = request.POST)

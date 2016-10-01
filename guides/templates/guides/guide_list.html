@@ -6,5 +6,8 @@
 		<h><a href="/guides/{{ guide.id }}/">{{guide.title}}</a></h>
 		<p>{{guide.teaser}}</p>
 		</li>
+	{% empty %}
+		<p> Nothing Here Yet </p>
+		<p> check back later </p>
 	{% endfor %}
 {% endblock %}
