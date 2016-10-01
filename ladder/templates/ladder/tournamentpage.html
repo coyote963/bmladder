@@ -18,27 +18,33 @@
 	{% endif %}
 	
 	<hr>
-	{% load thumbnail %}
+<!-- 	For every participant in the list of ranked players, iterate through and display their names and their rankings
+ -->	
+ 	{% load thumbnail %}
 	{% for Participant in players_ranked %}
 	<div class= "panel panel-default"><a href= "/player/user/{{Participant.user.username}}">
 	{% if Participant.user.player.avatar %}
 	<img style="vertical-align:middle" src="{% thumbnail Participant.user.player.avatar 50x50 crop='smart' %}"></a>
 	{% endif %}
 
-	<p style = 'display:inline'>{{Participant.ranking}}. {{Participant.user.username}} in-game :{{Participant.user.player.ingamename}}</p>
+	<p style = 'display:inline'>{{Participant.ranking}}. {{Participant.user.username}} {% if Participant.user.player.ingamename %}in-game :{{Participant.user.player.ingamename}}{% endif %}</p>
 	</div>
 	{% endfor %}
     <ol>
     <hr>
+
+
+    <!-- display the comments -->
+    {% load contentbox %}
+    <!-- form to add comments to post -->
     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=tournament.pk %}">Add comment</a>
+	<!-- display all the comments -->
+
 	{% for comment in tournament.comments.all %}
-	    <div class="panel panel-default">
-	        <p style='display:inline'><i>On {{ comment.created_date }}</i>
-	        <strong>{{ comment.author }}:</strong>
-	        {{ comment.text|linebreaks }}</p>
-	    </div>
+	    {% show_content_box_simple comment.author comment.text %}
 	{% empty %}
 	    <p>No comments here yet :(</p>
 	{% endfor %}
 	<a class = "btn btn-default" href="{% url 'reportmatch' pk=tournament.pk %}">[Report a match]</a><a class="btn btn-default" href="{% url 'matchhistory' pk=tournament.pk %}">[View Match History]</a>
+	</hr>
 {% endblock %}
