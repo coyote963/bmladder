@@ -171,7 +171,5 @@ LOGIN_URL = '/accounts/login/'
 
 DEBUG = True
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
