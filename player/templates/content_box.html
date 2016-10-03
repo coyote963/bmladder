@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+	{% if avatar %}
+	{% load thumbnail %}
+	<a href="/user/player/{{username}}"><img style="vertical-align:middle" src="{% thumbnail avatar 50x50 crop='smart' %}"></a>
+	{% endif %}
+	<p style='display:inline'><i>On {{date}}</i>
+	<strong>{{username}}:</strong>
+	{{ content|linebreaks }}</p>
+</div>
