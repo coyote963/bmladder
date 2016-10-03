@@ -6,8 +6,12 @@ def save_profile(backend, user, response, *args, **kwargs):
         try:
             user.profile.ingamename = kwargs['uid']
         except AttributeError:
+
+    
             player = Profile(
                 user = user,
-                ingamename = kwargs['details']['player']['steamid']
+                steamid = kwargs['details']['player']['steamid']
+                ingamename = kwargs['details']['player']['personaname']
+                steamimage = kwargs['details']['player']['avatarmedium']
                 )
             player.save()
