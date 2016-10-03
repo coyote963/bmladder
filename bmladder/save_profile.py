@@ -4,7 +4,7 @@ def save_profile(backend, user, response, *args, **kwargs):
     
     if backend.name == 'steam':
         try:
-            user.profile.ingamename = kwargs['uid']
+            user.profile.steamid = kwargs['uid']
         except AttributeError:
             player = Profile(
                 user = user,
