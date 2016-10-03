@@ -6,8 +6,6 @@ def save_profile(backend, user, response, *args, **kwargs):
         try:
             user.profile.ingamename = kwargs['uid']
         except AttributeError:
-
-            import pdb; pdb.set_trace()
             player = Profile(
                 user = user,
                 ingamename = kwargs['details']['player']['steamid']
