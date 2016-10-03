@@ -3,8 +3,9 @@
 {% block content %}
 
 <h1>{{ user.username }}</h1>
-<p>{{ user.profile.ingamename }}</p>
+<p>In game name: {{ user.profile.ingamename }}</p>
 {% load staticfiles %}
+<p> steam id: {{user.profile.steamid}}</p>
 {% if user.profile.avatar %}
 <img src="{{user.profile.avatar.url}}"> 
 {% endif %}
