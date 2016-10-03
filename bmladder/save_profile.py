@@ -10,8 +10,8 @@ def save_profile(backend, user, response, *args, **kwargs):
     
             player = Profile(
                 user = user,
-                steamid = kwargs['details']['player']['steamid']
-                ingamename = kwargs['details']['player']['personaname']
-                steamimage = kwargs['details']['player']['avatarmedium']
+                steamid = kwargs['details']['player']['steamid'],
+                ingamename = kwargs['details']['player']['personaname'],
+                steamimage = kwargs['details']['player']['avatarmedium'],
                 )
             player.save()
