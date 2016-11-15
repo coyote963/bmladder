@@ -18,5 +18,5 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^leader/$', views.index, name = "leaderindex"),
+    url(r'^$', views.index, name = "leaderindex"),
 ]
