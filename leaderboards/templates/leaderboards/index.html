@@ -2,6 +2,6 @@
 {% block content %}
 	<h1> List of players </h1>
 	{% for player in playerlist %}
-	<p>{{player}}</p>
+	<p>{{player|safe|linebreaks}}</p>
 	{% endfor %}
 {% endblock %}
