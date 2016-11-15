@@ -4,7 +4,7 @@ from django.db import connection
 def index(request):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT ingamename, rating FROM player ORDER BY rating DESC;")
+			cursor.execute("SELECT ingamename, rating, player_id FROM player ORDER BY rating DESC;")
 			playerlist = cursor.fetchall()
 		finally:
 			cursor.close()
@@ -14,7 +14,7 @@ def index(request):
 def playerview(request, pk):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT killer_name, victim_name, dateoccurred, weapon FROM matchup WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
+			cursor.execute("SELECT killer_name, victim_name, dateoccurred, weapon, matchup_id FROM matchup WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
 				(pk, pk))
 			matchuplist = cursor.fetchall()
 		finally:

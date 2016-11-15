@@ -1,7 +1,7 @@
 {% extends "home/header.html" %}
 {% block content %}
 	<h1> List of players </h1>
-	{% for player, rating in playerlist %}
-	<p>{{player|safe}} {{rating|safe}}</p>
+	{% for player, rating, player_id in playerlist %}
+	<a href = "/{{player_id}}"><p>{{player|safe}} {{rating|safe}}</p></a>
 	{% endfor %}
 {% endblock %}
