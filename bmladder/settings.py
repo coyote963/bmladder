@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'player',
     'ladder',
     'clans',
-    'leader',
+    'stats',
     'social.apps.django_app.default',
     'easy_thumbnails',
     'django.contrib.sites',
