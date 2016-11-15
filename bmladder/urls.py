@@ -35,5 +35,6 @@ urlpatterns = [
     url(r'^clans/',include('clans.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^stats/', include('leaderboards.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
