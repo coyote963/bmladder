@@ -11,3 +11,14 @@ def index(request):
 	return render(request,
 		'leaderboards/index.html',
 		{'playerlist':playerlist})
+def playerview(request):
+	with connection.cursor() as cursor:
+		try:
+			cursor.execute("SELECT killer_name, victim_name, dateoccurred, weapon FROM matchup WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
+				(pk, pk))
+			matchuplist = cursor.fetchall()
+		finally:
+			cursor.close()
+	return render(request, 
+		'leaderboards/player.html',
+		{'matchuplist':matchuplist})

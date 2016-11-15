@@ -1,0 +1,5 @@
+{% extends "home/header.html" %}
+{% block content %}
+	{% for killer, victim, date, weapon in matchuplist %}
+	<p>{{killer}} {{victim}} {{date}} {{weapon}}</p>
+{% endblock %}
