@@ -2,6 +2,6 @@
 {% block content %}
 	<h1> List of players </h1>
 	{% for player, rating, player_id in playerlist %}
-	<a href = "/{{player_id}}"><p>{{player|safe}} {{rating|safe}}</p></a>
+	<a href = "ranks/{{player_id}}"><p>{{player|safe}} {{rating|safe}}</p></a>
 	{% endfor %}
 {% endblock %}
