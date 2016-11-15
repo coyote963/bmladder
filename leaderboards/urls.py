@@ -19,5 +19,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name = "leaderindex"),
-    url(r'^/(?P<pk>[0-9]+)/', views.playerview, name = "playerview"),
+    url(r'^(?P<pk>[0-9]+)/', views.playerview, name = "playerview"),
 ]
