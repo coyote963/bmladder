@@ -23,5 +23,10 @@ def playerview(request, pk):
 		'leaderboards/player.html',
 		{'matchuplist':matchuplist})
 def graph(request):
+	with connection.cursor() as cursor:
+		cursor.execute("SELECT rating FROM player ORDER BY rating DESC")
+		ratinglist = cursor.fetchall()
+		ratinglist = map((lambda x: x[0]), ratinglist)
 	return render(request,
-		'leaderboards/graph.html')
+		'leaderboards/graph.html',
+		{'ratinglist':ratinglist})
