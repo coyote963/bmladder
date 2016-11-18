@@ -11,7 +11,7 @@
   <div class="ct-chart"></div>
     <script>
   new Chartist.Line('.ct-chart', {
-  labels: {{indices}},
+  labels: {{indices|safe}},
   series: {{bins}}
 }, {
   width: 500,
