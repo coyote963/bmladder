@@ -11,10 +11,8 @@
   <div class="ct-chart"></div>
     <script>
   new Chartist.Line('.ct-chart', {
- 
-  series: [
-    {{ratinglist}}
-  ]
+  labels: {{indices}},
+  series: {{bins}}
 }, {
   width: 500,
   height: 300

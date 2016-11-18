@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db import connection
+import numbpy
 # Create your views here.
 def index(request):
 	with connection.cursor() as cursor:
@@ -24,9 +25,22 @@ def playerview(request, pk):
 		{'matchuplist':matchuplist})
 def graph(request):
 	with connection.cursor() as cursor:
-		cursor.execute("SELECT rating FROM player ORDER BY rating DESC")
+		cursor.execute("SELECT rating FROM player ORDER BY rating ASC")
 		ratinglist = cursor.fetchall()
 		ratinglist = map((lambda x: x[0]), ratinglist)
+		indices = map((lambda x: str(x)), createrange(ratinglist, 3))
+		bins = createfrequency(ratinglist, 3)
 	return render(request,
 		'leaderboards/graph.html',
-		{'ratinglist':ratinglist})
+		{'ratinglist':ratinglist,
+		'indices':indices,
+		'bins':bins,})
+def createrange(ratinglist, step):
+	minimum =  (ratinglist[0] / step) * step
+	maximum =  (ratinglist[-1] /stem ) *step + step
+	return range(minimum, maximum+ step, step)
+def createfrequency(ratinglist, step):
+	minimum =  (ratinglist[0] / step) * step
+	maximum =  (ratinglist[-1] /stem ) *step + step
+	numbins = len(range(minimum, maximum+ step, step))
+	return numpy.histogram(ratinglist, numbins)[0]
