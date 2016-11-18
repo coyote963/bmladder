@@ -28,8 +28,8 @@ def graph(request):
 		cursor.execute("SELECT rating FROM player ORDER BY rating ASC")
 		ratinglist = cursor.fetchall()
 		ratinglist = map((lambda x: x[0]), ratinglist)
-		indices = map((lambda x: str(x)), createrange(ratinglist, 30))
-		bins = createfrequency(ratinglist, 30)
+		indices = map((lambda x: str(x)), createrange(ratinglist,10))
+		bins = createfrequency(ratinglist, 10)
 
 	return render(request,
 		'leaderboards/graph.html',
