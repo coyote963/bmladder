@@ -37,7 +37,7 @@ def graph(request):
 		'bins':bins,})
 def createrange(ratinglist, step):
 	minimum =  (ratinglist[0] / step) * step
-	maximum =  (ratinglist[-1] /stem ) *step + step
+	maximum =  (ratinglist[-1] /step ) *step + step
 	return range(minimum, maximum+ step, step)
 def createfrequency(ratinglist, step):
 	minimum =  (ratinglist[0] / step) * step
