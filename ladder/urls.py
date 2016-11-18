@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^tournament/reportmatch/(?P<pk>[0-9]+)/$', views.reportmatch, name='reportmatch'),
     url(r'^createtournament/$', views.createtournament, name='createtournament'),
     url(r'^post/(?P<pk>[0-9]+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
+    
 ]

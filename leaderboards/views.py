@@ -4,7 +4,7 @@ from django.db import connection
 def index(request):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT ingamename, rating, player_id FROM player ORDER BY rating DESC;")
+			cursor.execute("SELECT ingamename, rating, player_id FROM player ORDER BY rating DESC LIMIT 100;")
 			playerlist = cursor.fetchall()
 		finally:
 			cursor.close()
@@ -22,3 +22,6 @@ def playerview(request, pk):
 	return render(request, 
 		'leaderboards/player.html',
 		{'matchuplist':matchuplist})
+def graph(request):
+	return render(request,
+		'leaderboards/graph.html')
