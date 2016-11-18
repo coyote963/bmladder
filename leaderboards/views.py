@@ -46,4 +46,4 @@ def createfrequency(ratinglist, step):
 	minimum =  (ratinglist[0] / step) * step
 	maximum =  (ratinglist[-1] /step ) *step + step
 	numbins = len(range(minimum, maximum+ step, step))
-	return numpy.histogram(ratinglist, numbins)[0]
+	return list(numpy.histogram(ratinglist, numbins)[0])
