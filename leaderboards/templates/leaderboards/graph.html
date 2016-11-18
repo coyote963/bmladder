@@ -12,7 +12,7 @@
     <script>
   new Chartist.Line('.ct-chart', {
   labels: {{indices|safe}},
-  series: {{bins}}
+  series: [{{bins}}]
 }, {
   width: 500,
   height: 300
