@@ -30,11 +30,14 @@ def graph(request):
 		ratinglist = map((lambda x: x[0]), ratinglist)
 		indices = map((lambda x: str(x)), createrange(ratinglist, 3))
 		bins = createfrequency(ratinglist, 3)
+
 	return render(request,
 		'leaderboards/graph.html',
 		{'ratinglist':ratinglist,
 		'indices':indices,
-		'bins':bins,})
+		'bins':bins,
+		'lenindices':len(indices)
+		'lenbins': len(bins)})
 def createrange(ratinglist, step):
 	minimum =  (ratinglist[0] / step) * step
 	maximum =  (ratinglist[-1] /step ) *step + step
