@@ -36,7 +36,7 @@ def graph(request):
 		{'ratinglist':ratinglist,
 		'indices':indices,
 		'bins':bins,
-		'lenindices':len(indices)
+		'lenindices':len(indices),
 		'lenbins': len(bins)})
 def createrange(ratinglist, step):
 	minimum =  (ratinglist[0] / step) * step
