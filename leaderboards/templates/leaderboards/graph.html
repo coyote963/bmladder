@@ -1,13 +1,13 @@
-<html>
-<head>
+{% extends "home/header.html" %}
+{% block headercontent %}
   <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
   <link href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
   <link href='http://fonts.googleapis.com/css?family=Oxygen:300' rel='stylesheet' type='text/css'>
   <meta charset="utf-8">
   <title>Chartist.js - Simple line chart</title>
+{% endblock %}
+{% block content %}
 
-</head>
-<body>
   <div class="ct-chart"></div>
     <script>
   new Chartist.Line('.ct-chart', {
@@ -22,5 +22,4 @@
   height: 300
 });
   </script>
-</body>
-</html>
+  {% endblock %}
