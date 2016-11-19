@@ -9,9 +9,9 @@
 {% block content %}
 
   <div class="ct-chart" id="chart1"></div>
-  <div class="ct-chart" id = "chart2"></div>  
+  <div class="ct-chart" id ="chart2"></div>  
     <script>
-  new Chartist.Line('#chart2', {
+  new Chartist.Line('#chart1', {
   labels: {{indices|safe}},
   series: [{{bins}}]
 
@@ -19,12 +19,15 @@
   width: 1000,
   height: 300
 });
-  new Chartist.Pie('#chart2',{
+  new Chartist.Pie(
+    '#chart2',
+    {
       labels: ['mon','tue','wed'],
       series: [2,3,4]
-    },
-    {width: 500,
-      height: 500};
+    }, {
+      width: 500,
+      height: 500
+    });
 </script>
   <p>{{lenindices}}</p>
   <p>{{lenbins}}</p>
