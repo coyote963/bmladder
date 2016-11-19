@@ -8,47 +8,23 @@
 {% endblock %}
 {% block content %}
 
-  <div class="ct-chart"></div>
+  <div class="ct-chart" id="chart1"></div>
+  <div class="ct-chart" id = "chart2"></div>  
     <script>
-  new Chartist.Line('.ct-chart', {
+  new Chartist.Line('#chart2', {
   labels: {{indices|safe}},
   series: [{{bins}}]
 
 }, {
-  width: 1250,
+  width: 1000,
   height: 300
 });
-  </script>
-
-  <div class="ct-pie"></div>
-    <script>
-    var data = {
-    labels: ['Bananas', 'Apples', 'Grapes'],
-    series: [20, 15, 40]
-  };
-
-  var options = {
-    labelInterpolationFnc: function(value) {
-      return value[9]
-    }
-  };
-
-  var responsiveOptions = [
-    ['screen and (min-width: 640px)', {
-      chartPadding: 30,
-      labelOffset: 100,
-      labelDirection: 'explode',
-      labelInterpolationFnc: function(value) {
-        return value;
-      }
-    }],
-    ['screen and (min-width: 1024px)', {
-      labelOffset: 80,
-      chartPadding: 20
-    }]
-  ];
-
-  new Chartist.Pie('.ct-pie', data, responsiveOptions);
+  new Chartist.Pie('#chart2',{
+      labels: ['mon','tue','wed'],
+      series: [2,3,4]
+    },
+    {width: 500,
+      height: 500};
 </script>
   <p>{{lenindices}}</p>
   <p>{{lenbins}}</p>
