@@ -4,7 +4,7 @@
   <link href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
   <link href='http://fonts.googleapis.com/css?family=Oxygen:300' rel='stylesheet' type='text/css'>
   <meta charset="utf-8">
-  <title>Chartist.js - Simple line chart</title>
+  <title>Chartist.js</title>
 {% endblock %}
 {% block content %}
 
@@ -13,11 +13,43 @@
   new Chartist.Line('.ct-chart', {
   labels: {{indices|safe}},
   series: [{{bins}}]
+
 }, {
   width: 1250,
   height: 300
 });
   </script>
+
+  <div class=".ct-pie"></div>
+    <script>
+    var data = {
+    labels: ['Bananas', 'Apples', 'Grapes'],
+    series: [20, 15, 40]
+  };
+
+  var options = {
+    labelInterpolationFnc: function(value) {
+      return value[9]
+    }
+  };
+
+  var responsiveOptions = [
+    ['screen and (min-width: 640px)', {
+      chartPadding: 30,
+      labelOffset: 100,
+      labelDirection: 'explode',
+      labelInterpolationFnc: function(value) {
+        return value;
+      }
+    }],
+    ['screen and (min-width: 1024px)', {
+      labelOffset: 80,
+      chartPadding: 20
+    }]
+  ];
+
+  new Chartist.Pie('.ct-chart', data, responsiveOptions);
+</script>
   <p>{{lenindices}}</p>
   <p>{{lenbins}}</p>
   {% endblock %}
