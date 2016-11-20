@@ -34,7 +34,7 @@ def graph(request):
 
 		cursor.execute("SELECT weapon FROM matchup ORDER BY dateoccurred DESC LIMIT 1000;")
 		weaponlist = cursor.fetchall()
-		weaponcounts = Counter(weaponlist)
+		weaponcounts = map((lambda x: x[0]), Counter(weaponlist))
 		weapons, frequency = weaponcounts.keys(), weaponcounts.values()
 
 	return render(request,
