@@ -37,7 +37,7 @@ def graph(request):
 		weaponlist = map((lambda x: x[0]), weaponlist)
 		weaponcounts = Counter(weaponlist)
 		weapons, frequency = weaponcounts.keys(), weaponcounts.values()
-		weapons = map((lambda x: x[0]), weapons)
+		weapons = map((lambda x: str(x[0]), weapons))
 	return render(request,
 		'leaderboards/graph.html',
 		{'ratinglist':ratinglist,
