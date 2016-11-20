@@ -14,7 +14,7 @@
 {% block content %}
 
   <div class="ct-chart" id="chart1"></div>
-  
+  <div class="ct-chart" id = 'chart2'></div>
     <script>
   new Chartist.Line('#chart1', {
   labels: {{indices|safe}},
@@ -24,9 +24,7 @@
   width: 1250,
   height: 300
 });
-  new Chartist.Pie(
-    '#chart2',
-    {
+  new Chartist.Pie('#chart2',{
       labels: {{weapons|safe}},
       series: {{frequency}}
     }, {
@@ -34,6 +32,4 @@
       height: 500
     });
 </script>
- {{weapons}}
- {{indices}}
   {% endblock %}
