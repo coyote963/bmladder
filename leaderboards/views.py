@@ -38,7 +38,7 @@ def playerrating(pk):
 		finally:
 			cursor.close()
 			ratinglist = ratingincreases+ratingdecreases
-			ratinglist.sort(key=lambda x: x[2])
+			ratinglist.sort(key=lambda x: x[1])
 			return map((lambda x: x[0]), ratinglist)
 
 	
