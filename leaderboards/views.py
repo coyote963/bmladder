@@ -32,7 +32,7 @@ def playerrating(pk):
 			cursor.execute("SELECT killerrating, dateoccurred FROM matchup WHERE killer_id = (%s) ORDER BY dateoccurred DESC",
 				(pk,))
 			ratingincreases = cursor.fetchall()
-			cursor.execute("SELECT killerrating, dateoccurred FROM matchup WHERE victim_id = (%s) ORDER BY dateoccurred DESC",
+			cursor.execute("SELECT victimrating, dateoccurred FROM matchup WHERE victim_id = (%s) ORDER BY dateoccurred DESC",
 				(pk,))
 			ratingdecreases = cursor.fetchall()
 		finally:
