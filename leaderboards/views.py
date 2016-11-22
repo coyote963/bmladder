@@ -30,7 +30,7 @@ def graph(request):
 		ratinglist = cursor.fetchall()
 		ratinglist = map((lambda x: x[0]), ratinglist)
 		indices = map((lambda x: str(x)), createrange(ratinglist,20))
-		bins = createfrequency(ratinglist, 120)
+		bins = createfrequency(ratinglist, 20)
 
 		cursor.execute("SELECT weapon FROM matchup ORDER BY dateoccurred DESC LIMIT 1000;")
 		weaponlist = cursor.fetchall()
