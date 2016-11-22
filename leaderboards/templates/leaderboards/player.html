@@ -1,5 +1,20 @@
 {% extends "home/header.html" %}
+{% block headercontent %}
+  <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <link href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Oxygen:300' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8">
+{% endblock %}
 {% block content %}
+	<div class="ct-chart" id = "chart1"></div>
+	<script>
+	new Chartist.Line('#chart1', {
+		series: [{{ratinghistory}}]
+	}, {
+		width: 900,
+		height: 600
+	}),
+	</script>
 	{% for killer, victim, date, weapon in matchuplist %}
 	<p>{{killer}} {{victim}} {{date}} {{weapon}}</p>
 	{% endfor %}

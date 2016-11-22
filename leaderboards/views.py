@@ -16,14 +16,32 @@ def index(request):
 def playerview(request, pk):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT killer_name, victim_name, dateoccurred, weapon, matchup_id FROM matchup WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
+			cursor.execute("SELECT killer_name,killer_id, victim_name,victim_id, dateoccurred, weapon, matchup_id FROM matchup WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
 				(pk, pk))
 			matchuplist = cursor.fetchall()
+			ratinghistory = playerrating(pk)
 		finally:
 			cursor.close()
 	return render(request, 
 		'leaderboards/player.html',
-		{'matchuplist':matchuplist})
+		{'matchuplist':matchuplist,
+		'ratinghistory': ratinghistory})
+def playerrating(pk):
+	with connection.cursor() as cursor:
+		try:
+			cursor.execute("SELECT killerrating, dateoccurred FROM matchup WHERE killer_id = (%s) ORDER BY dateoccurred DESC",
+				(pk,))
+			ratingincreases = cursor.fetchall()
+			cursor.execute("SELECT killerrating, dateoccurred FROM matchup WHERE victim_id = (%s) ORDER BY dateoccurred DESC",
+				(pk,))
+			ratingdecreases = cursor.fetchall()
+		finally:
+			cursor.close()
+			ratinglist = ratingincreases+ratingdecreases
+			ratinglist.sort(key=lambda x: x[2])
+			return map((lambda x: x[0]), ratinglist)
+
+	
 def graph(request):
 	with connection.cursor() as cursor:
 		cursor.execute("SELECT rating FROM player ORDER BY rating ASC;")
