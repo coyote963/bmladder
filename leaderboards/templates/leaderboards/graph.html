@@ -8,6 +8,7 @@
   <style>
     .ct-label {
       font-size: 15px;
+      fill: rgba(40,130,70,1);
     }
   </style>
 {% endblock %}
@@ -18,32 +19,50 @@
     <script>
   new Chartist.Line('#chart1', {
   labels: {{indices|safe}},
-  series: [{{bins}}]
+  series: {{bins}}
 
 }, {
   width: 1250,
   height: 300
 });
-  new Chartist.Pie('#chart2',{
-      labels: {{weapons|safe}},
+var data = {
+      labels: {{weapons|safe}}
       series: {{frequency}}
-    }, {
+    };
+  
+  var total = data.series.reduce(function sum(prev, curr) {
+    return prev + curr;
+  });
+  new Chartist.Pie(
+    '#chart2',
+    data,
+    {
       width: 500,
       height: 500
     },
     [
-  ['screen and (min-width: 640px)', {
-    chartPadding: 30,
-    labelOffset: 100,
-    labelDirection: 'explode',
-    labelInterpolationFnc: function(value) {
-      return value;
-    }
-  }],
-  ['screen and (min-width: 1024px)', {
-    labelOffset: 80,
-    chartPadding: 20
-  }]
-]);
+      ['screen and (min-width: 6px)',
+        {
+          chartPadding: 70,
+          labelOffset: 10,
+          labelDirection: 'explode',
+          labelInterpolationFnc: function(label, index) 
+          {
+            return data.series[index] / total > 0.02 ? label : '';
+          }
+        }
+       ],
+      ['screen and (min-width: 1024px)', 
+       {
+        labelOffset: 0,
+        chartPadding: 55,
+        labelDirection: 'explode',
+        labelInterpolationFnc: function(label, index) 
+        {
+          return data.series[index] / total > 0.02 ? label : '';
+        }
+       }
+      ]
+    ]);
 </script>
   {% endblock %}
