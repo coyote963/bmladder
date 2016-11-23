@@ -18,7 +18,7 @@ def index(request):
 				else:
 					response = urllib2.urlopen('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=51A511E7B3DD3A47CC84A794581C452F&steamids='+steamid)
 					data = json.load(response)
-					profilearray.append(data['response']['players'][0]['avatar'])
+					profilearray.append(data['response']['players'][0]['avatar'][0])
 			map((lambda x,y: x.append(y)),playerlist, profilearray)
 		finally:
 			cursor.close()
