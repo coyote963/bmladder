@@ -11,17 +11,9 @@ def index(request):
 			profilearray = []
 			cursor.execute("SELECT ingamename, rating, player_id, steamid FROM player ORDER BY rating DESC LIMIT 100;")
 			playerlist = cursor.fetchall()
-			steamidlist = [row[3] for row in playerlist]
-			for steamid in steamidlist:
-				if steamid == '-1':
-					profilearray.append('http://cdn.akamai.steamstatic.com/steamcommunity/public/images/avatars/e6/e661a54c9a740edaadbac98342c2fdd3d69fbe13_full.jpg')
-				else:
-					response = urllib2.urlopen('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=51A511E7B3DD3A47CC84A794581C452F&steamids='+steamid)
-					data = json.load(response)
-					profilearray.append(data['response']['players'][0]['avatar'][0])
-			map((lambda x,y: x.append(y)),playerlist, profilearray)
-		finally:
-			cursor.close()
+			
+	finally:
+		cursor.close()
 	return render(request,
 		'leaderboards/index.html',
 		{'playerlist':playerlist})
