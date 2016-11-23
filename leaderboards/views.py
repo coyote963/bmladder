@@ -6,7 +6,7 @@ from collections import Counter
 def index(request):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT ingamename, rating, player_id FROM player ORDER BY rating DESC LIMIT 100;")
+			cursor.execute("SELECT ingamename, rating, player_id, steamid FROM player ORDER BY rating DESC LIMIT 100;")
 			playerlist = cursor.fetchall()
 		finally:
 			cursor.close()

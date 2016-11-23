@@ -3,10 +3,13 @@
 {% block content %}
 	<h1> List of players </h1>
 	<div class="row">
-		{% for ingamename, rating, player_id  in playerlist %}
+		{% for ingamename, rating, player_id, steamid, pictureurl in playerlist %}
 		<div class="col-sm-6 col-md-4">
 		    <div class="thumbnail">
-		      <img src="https://placeholdit.imgix.net/~text?txtsize=23&bg=39cccc&txtclr=fffffftxt=242%C3%97200&w=242&h=200">
+		    {% if steamid =="-1" %}
+		      <img src="{{pictureurl}}">
+		    {% else %}
+		      <img src=
 		      <div class="caption">
 		        <h3>{{ingamename}}</h3>
 		        <p>Rating: {{rating}}</p>
