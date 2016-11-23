@@ -8,12 +8,10 @@ from collections import Counter
 def index(request):
 	with connection.cursor() as cursor:
 		try:
-			profilearray = []
 			cursor.execute("SELECT ingamename, rating, player_id, steamid FROM player ORDER BY rating DESC LIMIT 100;")
 			playerlist = cursor.fetchall()
-			
-	finally:
-		cursor.close()
+		finally:
+			cursor.close()
 	return render(request,
 		'leaderboards/index.html',
 		{'playerlist':playerlist})
