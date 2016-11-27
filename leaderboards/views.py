@@ -4,17 +4,26 @@ import urllib2
 import json
 import numpy
 from collections import Counter
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 def index(request):
 	with connection.cursor() as cursor:
 		try:
 			cursor.execute("SELECT ingamename, rating, player_id, steamid FROM player ORDER BY rating DESC LIMIT 100;")
-			playerlist = cursor.fetchall()
+			allplayers = cursor.fetchall()
+			players = Paginator(allplayers,100)
+			page = request.GET.get('page')
+			try:
+				playerlist = paginator.page(page)
+			except PageNotAnInteger:
+				playerlist = paginator.page(1)
+			except EmptyPage:
+				playerlist = paginator.page(paginator.num_pages)
 		finally:
 			cursor.close()
 	return render(request,
 		'leaderboards/index.html',
-		{'playerlist':playerlist})
+		{'players':players})
 def playerview(request, pk):
 	with connection.cursor() as cursor:
 		try:
