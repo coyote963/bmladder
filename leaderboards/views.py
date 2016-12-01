@@ -61,6 +61,7 @@ def playername(pk):
 		try: 
 			cursor.execute("SELECT ingamename FROM player WHERE pk = (%s);",
 				(pk,))
+		finally:
 			return cursor.fetchall()[0]
 def graph(request):
 	with connection.cursor() as cursor:
