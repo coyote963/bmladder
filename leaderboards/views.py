@@ -58,7 +58,7 @@ def playerrating(pk):
 
 def playername(pk):
 	with connection.cursor() as cursor:
-		cursor.execute("SELECT ingamename FROM player WHERE pk = (%s);",
+		cursor.execute("SELECT ingamename FROM player WHERE player_id = (%s);",
 				(pk,))
 	return cursor.fetchall()[0]
 def graph(request):
