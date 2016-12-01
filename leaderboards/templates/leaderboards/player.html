@@ -34,7 +34,7 @@
     		{% if pk == killer_id %}
     		<td class="table-active"><a href="/stats/{{victim_id}}">{{killer_name|safe}},{{victim_name|safe}}</a></td>
     		{% else %}
-    		<td class="table-danger"><a href="/stats/{{killer_id}}">{{killer_name|safe}},{{victim_name|safe}}</a></td>
+    		<td class="table-danger"><a href="/stats/{{killer_id}}">{{killer_name|safe}}</a></td>
     		{% endif %}
     		<td>{{weapon}}</td>
     		<td>{{dateoccurred}}</td>
