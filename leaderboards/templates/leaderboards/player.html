@@ -18,7 +18,28 @@
 		showPoint: false
 	})
 	</script>
-	{% for killer, victim, date, weapon in matchuplist %}
-	<p>{{killer}} {{victim}} {{date}} {{weapon}}</p>
+	
+	<table class="table table-hover">
+ 		<thead>
+    		<tr>
+    			<th>Player</th>
+    			<th>Weapon</th>
+    			<th>Date</th>
+    		</tr>
+    	</thead>
+    	{% for killer_name, killer_id, victim_name, victim_id, dateoccurred, weapon, matchup_id in matchuplist %}
+    	<tbody>
+    		{% if pk == killer_id %}
+    		<tr class="table-success">
+    			<td>{{victim_name}}</td>
+    		{% else %}
+    		<tr class="table-danger">
+    			<td>{{victim_name}}</td>
+    		{% endif %}
+    		<td>{{weapon}}</td>
+    		<td>{{dateoccurred}}</td></tr>
+    	{% endfor %}
+    	</tbody>
+
 	{% endfor %}
 {% endblock %}
