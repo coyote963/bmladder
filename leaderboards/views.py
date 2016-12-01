@@ -31,12 +31,15 @@ def playerview(request, pk):
 				(pk, pk))
 			matchuplist = cursor.fetchall()
 			ratinghistory = playerrating(pk)
+			playername = playername(pk)
 		finally:
 			cursor.close()
 	return render(request, 
 		'leaderboards/player.html',
 		{'matchuplist':matchuplist,
-		'ratinghistory': ratinghistory})
+		'ratinghistory': ratinghistory,
+		'playername':playername,
+		'pk': pk})
 def playerrating(pk):
 	with connection.cursor() as cursor:
 		try:
@@ -53,7 +56,12 @@ def playerrating(pk):
 			ratinglist = ratinglist[-100:]
 			return map((lambda x: x[0]), ratinglist)
 
-	
+def playername(pk):
+	with connection.cursor() as cursor:
+		try: 
+			cursor.execute("SELECT ingamename FROM player WHERE pk = (%s);",
+				(pk,))
+			return cursor.fetchall()[0]
 def graph(request):
 	with connection.cursor() as cursor:
 		cursor.execute("SELECT rating FROM player ORDER BY rating ASC;")
