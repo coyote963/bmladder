@@ -51,7 +51,7 @@
   				Page {{players.number}} of {{players.paginator.num_pages}}.
   			</span>
 
-  			{ % if contacts.has_next %}
+  			{% if contacts.has_next %}
   				<a href="?page={{players.next_page_number}}">next</a>
   			{% endif %}
   		</span>
