@@ -3,7 +3,7 @@
 {% block content %}
 	<h1> List of players </h1>
 	<div class="row">
-		{% for ingamename, rating, player_id, steamid in players %}
+		{% for ingamename, rating, player_id, steamid in players.object_list %}
 		<div class="col-sm-6 col-md-4">
 		    <div class="thumbnail">
 		    {% if rating > 1500 %}

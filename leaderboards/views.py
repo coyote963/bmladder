@@ -23,7 +23,7 @@ def index(request):
 			cursor.close()
 	return render(request,
 		'leaderboards/index.html',
-		{'players':players})
+		{'players':playerlist})
 def playerview(request, pk):
 	with connection.cursor() as cursor:
 		try:
