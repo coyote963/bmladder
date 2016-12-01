@@ -6,7 +6,7 @@
   <meta charset="utf-8">
 {% endblock %}
 {% block content %}
-	<h>{{playername}}</h>
+	<h1>{{playername}}</h1>
 	<div class="ct-chart" id = "chart1"></div>
 	<script>
 	new Chartist.Line('#chart1', {
@@ -32,9 +32,9 @@
     	{% for killer_name, killer_id, victim_name, victim_id, dateoccurred, weapon, matchup_id in matchuplist %}
     		<tr>
     		{% if pk == killer_id %}
-    		<td class="table-active"><a href="/stats/{{victim_id}}">{{killer_name|safe}},{{victim_name|safe}}</a></td>
+    		<td class="success"><a href="/stats/{{victim_id}}">{{victim_name}}</a></td>
     		{% else %}
-    		<td class="table-danger"><a href="/stats/{{killer_id}}">{{killer_name|safe}}</a></td>
+    		<td class="danger"><a href="/stats/{{killer_id}}">{{killer_name}}</a></td>
     		{% endif %}
     		<td>{{weapon}}</td>
     		<td>{{dateoccurred}}</td>
