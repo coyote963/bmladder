@@ -39,7 +39,7 @@ def playerview(request, pk):
 		{'matchuplist':matchuplist,
 		'ratinghistory': ratinghistory,
 		'playername':playername,
-		'pk': pk})
+		'pk': int(pk)})
 def playerrating(pk):
 	with connection.cursor() as cursor:
 		try:
