@@ -14,11 +14,11 @@ def index(request):
 			players = Paginator(allplayers,100)
 			page = request.GET.get('page')
 			try:
-				playerlist = paginator.page(page)
+				playerlist = players.page(page)
 			except PageNotAnInteger:
-				playerlist = paginator.page(1)
+				playerlist = players.page(1)
 			except EmptyPage:
-				playerlist = paginator.page(paginator.num_pages)
+				playerlist = players.page(paginator.num_pages)
 		finally:
 			cursor.close()
 	return render(request,
