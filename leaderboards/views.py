@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT ingamename, rating, player_id, steamid FROM player ORDER BY rating DESC LIMIT 100;")
+			cursor.execute("SELECT ingamename, rating, player_id, steamid FROM player ORDER BY rating DESC;")
 			allplayers = cursor.fetchall()
 			players = Paginator(allplayers,100)
 			page = request.GET.get('page')

@@ -3,7 +3,7 @@
 {% block content %}
 	<h1> List of players </h1>
 	<div class="row">
-		{% for ingamename, rating, player_id, steamid in players.object_list %}
+		{% for ingamename, rating, player_id, steamid in players %}
 		<div class="col-sm-6 col-md-4">
 		    <div class="thumbnail">
 		    {% if rating > 1500 %}
@@ -51,7 +51,7 @@
   				Page {{players.number}} of {{players.paginator.num_pages}}.
   			</span>
 
-  			{% if contacts.has_next %}
+  			{% if players.has_next %}
   				<a href="?page={{players.next_page_number}}">next</a>
   			{% endif %}
   		</span>
