@@ -31,7 +31,7 @@ def playerview(request, pk):
 				(pk, pk))
 			matchuplist = cursor.fetchall()
 			ratinghistory = playerrating(pk)
-			playername = playername(pk)
+			playerign = playername(pk)
 		finally:
 			cursor.close()
 	return render(request, 
