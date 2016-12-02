@@ -30,15 +30,16 @@ def playerview(request, pk):
 			cursor.execute("SELECT killer_name,killer_id, victim_name,victim_id, dateoccurred, weapon, matchup_id FROM matchup WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
 				(pk, pk))
 			matchuplist = cursor.fetchall()
-			ratinghistory = playerrating(pk)
-			playerign = playername(pk)
+			ratinghistory = playerrating(int(pk))
+			playerdata = playername(pk)
 		finally:
 			cursor.close()
 	return render(request, 
 		'leaderboards/player.html',
 		{'matchuplist':matchuplist,
 		'ratinghistory': ratinghistory,
-		'playername':playername,
+		'playername':playerdata.get('ingamename'),
+		'playerrating':playerdata.get('rating'),
 		'pk': int(pk)})
 def playerrating(pk):
 	with connection.cursor() as cursor:
@@ -52,15 +53,18 @@ def playerrating(pk):
 		finally:
 			cursor.close()
 			ratinglist = ratingincreases+ratingdecreases
-			ratinglist.sort(key=lambda x: x[1])
+			ratinglist.sort(key = lambda x: x[1])
 			ratinglist = ratinglist[-100:]
 			return map((lambda x: x[0]), ratinglist)
 
 def playername(pk):
 	with connection.cursor() as cursor:
-		cursor.execute("SELECT ingamename FROM player WHERE player_id = (%s);",
+		cursor.execute("SELECT ingamename,rating FROM player WHERE player_id = (%s);",
 				(pk,))
-		playerign = cursor.fetchall()[0]
+		playerign = cursor.fetchone()
+		if playerign is not None:
+			return {'ingamename': playerign[0],
+			'rating':playerign[1]}
 	return playerign
 def graph(request):
 	with connection.cursor() as cursor:
