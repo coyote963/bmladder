@@ -1,9 +1,140 @@
-{% extends "home/header.html" %}
-{% block content %}
-	<h1> Boring Man Ladder Hop</h1>
-	<p>Where you will find all your boring man needs!</p>
-	<p>What is this website for: It hosts guides on boring man strategy, and also contains my personal blog. The blog is for me only, but the guides are written to the potential player looking to get better</p>
-	<a href='/stats'>Leaderboard</a>
-	<a href='/stats/graph'>Graphs</a>
-	
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Website for boring man community">
+    <meta name="author" content="Coyote">
+
+    <title>Boring Man OTSC</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "home/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static "home/css/one-page-wonder.css" %}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Boring Man Ladder</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/stats/">Ratings</a>
+                    </li>
+                    <li>
+                        <a href="/ladder/">Tournaments</a>
+                    </li>
+                    <li>
+                        <a href="/clans/">Clans</a>
+                    </li>
+                    <li>
+                        <a href="/guides/">Guides</a>
+                    </li>
+                    
+                    <li>{% if not user.is_authenticated %}<a href='/login/'>Login</a>
+                     {% else %}<a href='/logout'>Logout</a>{% endif %}</li>
+                    {% if not user.is_authenticated %}
+                    <li><a href="/player/register/">Register</a></li>
+                    {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Full Width Image Header -->
+    <header class="header-image" style="background:url('{% static "home/img/brain.jpg" %}')">
+        <div class="headline">
+            <div class = "container">
+                <h1>Boring Man Ladder</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <hr class="featurette-divider">
+
+        <!-- First Featurette -->
+        <div class="featurette" id="leaderboards">
+            <img class="featurette-image img-circle img-responsive pull-right" src="{% static "home/img/graph.jpg" %}">
+            <h2 class="featurette-heading">Boring Man Leaderboards
+                <span class="text-muted">Track your performance.</span>
+            </h2>
+            <p class="lead">With live ratings, you can see how you stack up to other players, as well as see what weapons other people use. Find out what weapon works for you! Useful to see how well you do against a particular person. Your ratings change each time you reload!</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- Second Featurette -->
+        <div class="featurette" id="guides">
+            <img class="featurette-image img-circle img-responsive pull-left" src="{% static "home/img/milki.png" %}">
+            <h2 class="featurette-heading">Boring Man Guides
+                <span class="text-muted">Learn and Teach</span>
+            </h2>
+            <p class="lead">With Boring Man Guides, you can read guides that will help your rating, and take you to the next level. Guides are written by the players for the players! They will also cover a wider range of topics, including map building, weapon specific things, and how to earn achievements.</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- Third Featurette -->
+        <div class="featurette" id="Tournaments">
+            <img class="featurette-image img-circle img-responsive pull-right" src="{% static "home/img/tournament.png" %}">
+            <h2 class="featurette-heading">Ladder Tournaments
+                <span class="text-muted">Ready to put your skills to the test?</span>
+            </h2>
+            <p class="lead">Ladder tournaments let you strut your stuff in front of a live audience. Showcase what you learned and bring glory to your name! Winning a tournament gives you bragging rights, and real practice against other players.</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Coyote 2016</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
