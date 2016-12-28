@@ -56,7 +56,6 @@
                     <li>
                         <a href="/guides/">Guides</a>
                     </li>
-                    
                     <li>{% if not user.is_authenticated %}<a href='/login/'>Login</a>
                      {% else %}<a href='/logout'>Logout</a>{% endif %}</li>
                     {% if not user.is_authenticated %}
@@ -71,7 +70,7 @@
     </nav>
 
     <!-- Full Width Image Header -->
-    <header class="header-image" style="background:url('{% static "home/img/brain.jpg" %}')">
+    <header class="header-image" style="background:url('{% static "home/img/bmladder.png" %}')">
         <div class="headline">
             <div class = "container">
                 <h1>Boring Man Ladder</h1>
@@ -83,7 +82,7 @@
     <div class="container">
 
         <hr class="featurette-divider">
-
+        <a href ="/login/steam"><img src = "https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png"></a>
         <!-- First Featurette -->
         <div class="featurette" id="leaderboards">
             <img class="featurette-image img-circle img-responsive pull-right" src="{% static "home/img/graph.jpg" %}">
