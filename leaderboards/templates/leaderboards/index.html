@@ -1,33 +1,28 @@
 {% extends "home/header.html" %}
-
+{% load static %}
 {% block content %}
 	<h1> List of players </h1>
 	<div class="row">
 		{% for ingamename, rating, player_id, steamid in players %}
 		<div class="col-sm-6 col-md-4">
 		    <div class="thumbnail">
-		    {% if rating > 1500 %}
-      		<img src="http://imgur.com/eAXz1A7.jpg">
-		    {% elif rating > 1450 %}
-      		<img src="http://imgur.com/Wfd4oY0.jpg">
+      		
+		    {% if rating > 1450 %}
+      		<img src="{% static "leaderboards/img/God_Slayer.png" %}">
 		    {% elif rating > 1400 %}
-      		<img src="http://imgur.com/DW5op3d.jpg">
+      		<img src="{% static "leaderboards/img/Elite.png" %}">
 		    {% elif rating > 1350 %}
-      		<img src="http://imgur.com/Et7MP13.jpg">
-		    {% elif rating > 1300 %}
-      		<img src="http://imgur.com/2dJ0t24.jpg">
-		    {% elif rating > 1250 %}
-      		<img src="http://imgur.com/x9YZ9TY.jpg">
+      		<img src="{% static "leaderboards/img/Platinum.png" %}">
+      		{% elif rating > 1275 %}
+      		<img src="{% static "leaderboards/img/Diamond.png" %}">
 		    {% elif rating > 1200 %}
-      		<img src="http://imgur.com/6NjbmCw.jpg">
-		    {% elif rating > 1150 %}
-      		<img src="http://imgur.com/BAMuhiG.jpg">
+      		<img src="{% static "leaderboards/img/Gold.png" %}">
 		    {% elif rating > 1100 %}
-      		<img src="http://imgur.com/C2dlnZY.jpg">
-		    {% elif rating > 1050 %}
-		    <img src="http://imgur.com/g5FJxK1.jpg">
+      		<img src="{% static "leaderboards/img/Silver.png" %}">
 		    {% elif rating > 1000 %}
-	      	<img src="http://imgur.com/pHxXque.jpg">
+      		<img src="{% static "leaderboards/img/Bronze.png" %}">
+		    {% elif rating > 900 %}
+      		<img src="{% static "leaderboards/img/Shit.png" %}">
 		    {% endif %}
 		      <div class="caption">
 		        <h3>{{forloop.counter}}. {{ingamename}}</h3>
