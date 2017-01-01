@@ -47,7 +47,7 @@ def indexrecent(request):
 def indexdm(request):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT ingamename, rating, player_id, steamid, active FROM playerdm ORDER BY rating DESC;")
+			cursor.execute("SELECT ingamename, rating, player_id, steamid, active FROM dmplayer ORDER BY rating DESC;")
 			allplayers = cursor.fetchall()
 			players = Paginator(allplayers,100)
 			page = request.GET.get('page')
@@ -67,7 +67,7 @@ def indexdm(request):
 def indexdmrecent(request):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT ingamename, rating, player_id, steamid, active, lastplayed FROM playerdm ORDER BY lastplayed DESC;")
+			cursor.execute("SELECT ingamename, rating, player_id, steamid, active, lastplayed FROM dmplayer ORDER BY lastplayed DESC;")
 			allplayers = cursor.fetchall()
 			players = Paginator(allplayers,100)
 			page = request.GET.get('page')
