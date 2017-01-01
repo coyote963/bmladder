@@ -104,7 +104,7 @@ def playerview(request, pk):
 def playerdmview(request, pk):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT killer_name,killer_id, victim_name,victim_id, dateoccurred, weapon, matchup_id FROM matchupdm WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
+			cursor.execute("SELECT killer_name,killer_id, victim_name,victim_id, dateoccurred, weapon, matchup_id FROM dmmatchup WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
 				(pk, pk))
 			matchuplist = cursor.fetchall()
 			ratinghistory = playerratingdm(int(pk))
@@ -122,10 +122,10 @@ def playerdmview(request, pk):
 def playerratingdm(pk):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT killerrating, dateoccurred FROM matchupdm WHERE killer_id = (%s) ORDER BY dateoccurred DESC",
+			cursor.execute("SELECT killerrating, dateoccurred FROM dmmatchup WHERE killer_id = (%s) ORDER BY dateoccurred DESC",
 				(pk,))
 			ratingincreases = cursor.fetchall()
-			cursor.execute("SELECT victimrating, dateoccurred FROM matchupdm WHERE victim_id = (%s) ORDER BY dateoccurred DESC",
+			cursor.execute("SELECT victimrating, dateoccurred FROM dmmatchup WHERE victim_id = (%s) ORDER BY dateoccurred DESC",
 				(pk,))
 			ratingdecreases = cursor.fetchall()
 		finally:
