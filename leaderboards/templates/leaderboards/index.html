@@ -13,6 +13,8 @@
 {% block content %}
 	<h1> List of players </h1>
 	<div class="row">
+
+		<button type="button" class="btn btn-primary btn-block">Show Hidden Players</button>
 		{% for ingamename, rating, player_id, steamid, active in players %}
 		<div class="col-sm-6 col-md-4 {% if not active %}inactive{% endif %}"
 		{% if not active %}style="display:none;"{% endif %}>
