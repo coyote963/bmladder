@@ -162,7 +162,7 @@ def playername(pk):
 	return playerign
 def playernamedm(pk):
 	with connection.cursor() as cursor:
-		cursor.execute("SELECT ingamename,rating FROM dnplayer WHERE player_id = (%s);",
+		cursor.execute("SELECT ingamename,rating FROM dmplayer WHERE player_id = (%s);",
 				(pk,))
 		playerign = cursor.fetchone()
 		if playerign is not None:
