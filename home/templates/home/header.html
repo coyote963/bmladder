@@ -33,53 +33,58 @@
 
 </head>
 
-<body class="body" style="background-color:#f6f6f6;background:url(https://cdn.discordapp.com/attachments/263545260309741568/263568260291624960/HUGE_FOREST.png) no-repeat fixed;">
-	{% load static %}
-	<div class="container-fluid" style="min-height:95%; ">
-		<div class="row">
-			<div class="col-sm-2">
-				<br>
-				<center>
-					<a href='/'><img src="http://imgur.com/6MK4A6u.jpg" class="responsive-img" style='max-height:100px;' alt="face1"></a>
-				</center>
-			</div>
-			<div class="col-sm-10">
-				<div class="page-header">
-  					<h1>Boring Man<small>Ladder Hop</small></h1>
-				</div>
-			</div>
-		</div><hr>
-		<div class="row">
-		  <div class="col-sm-2">
-		  <br>
+<body style="padding-top: 70px; background-color:#f6f6f6;background:url(https://cdn.discordapp.com/attachments/263545260309741568/263568260291624960/HUGE_FOREST.png) no-repeat fixed;">
+    <!-- Navigation -->
+    <nav class="navbar navbar-light navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">Ladder Hop</a>
+            </div>
 
-		  <br>
-		   <!-- Great, til you resize. -->
-			<!--<div class="well bs-sidebar affix" id="sidebar" style="background-color:#fff">-->
-			<div class="well bs-sidebar" id="sidebar" style="background-color:#fff">
-			  <ul class="nav nav-pills nav-stacked">
-				<li><a href='/'>Home</a></li>
-				<li><a href='/stats/'>Leaderboard</a></li>
-				<li><a href='/blog/'>My Blog</a></li>
-				<li><a href='/guides/'>Boring Man Guide</a></li>
-				<li><a href='/clans/'>Clans</a></li>
-				<li><a href='/ladder/'>Ladder Tournament</a></li>
-				{% if not user.is_authenticated %}
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                	<a href='/'>Home</a>
+                </li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Leaderboard
+    				<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+			          <li><a href="#">Team Deathmatch</a></li>
+			          <li><a href="#">Deathmatch</a></li>
+			        </ul>
+				</li>
+				<li>
+					<a href='/blog/'>My Bog</a>
+				</li>
+				<li>
+					<a href='/guides/'>Boring Man Guide</a>
+				</li>
+				<li>
+					<a href='/clans/'>Clans</a>
+				</li>
+				<li>
+					<a href='/ladder/'>Ladder Tournament</a>
+				</li>
+			</ul>
+				
+			{% if not user.is_authenticated %}
+			<ul class="nav navbar-nav navbar-right">
 				<li><a href='/login/'>Login</a></li>
-				{% else %}
-				<li><a href='/logout'>Logout</a></li>
-				{% endif %}
 				<li><a href="/player/register/">Register</a></li>
-
-			  </ul>
-			</div> <!--well bs-sidebar affix-->
-		  </div> <!--col-sm-2-->
-		  <div class="col-sm-10">
-			  {% if user.is_authenticated %}
-				<div class="container">
-					<h3> Hello, {{user.username}}</h3>
-					<ul class="nav nav-pills">
-						{% load inbox %}
+			</ul>
+			{% else %}
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create
+        				<span class="caret"></span></a>
+        			<ul class= "dropdown-menu">
+        				{% load inbox %}
 						<li role="presentation" class="active"><a href="/messages/">Mail: <span class="badge">{% inbox_count %} </span></a></li>
 						<li><a href="/messages/compose">Compose</a></li>
 						<li><a href="/player/user/{{user.username}}">My Profile</a></li>
@@ -88,21 +93,26 @@
 						<li><a href="/clans/createclan">Create a clan</a></li>
 						<li><a href="/ladder/createtournament">Add Tournament</a></li>
 					</ul>
-				</div><hr>
-				{% endif %}
-			<div class='container-fluid'>
-			<br><br>
-			   {% block content %}
-			   {% endblock %}	
+				</li>
+				<li><a href="/logout/">Logout</a></li>
+			</ul>
+			{% endif %}	
+        </div>
+    </nav>
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    	<div class="panel panel-default">
+  			<div class="panel-body">
+  				{% block content %}
+		 		{% endblock %}	
 			</div>
-		  </div>
-		</div> 
+		</div>		   
 	</div>
 	<footer>
-		<div class="container-fluid" style='margin-left:15px'>
-			<p><a href="https://github.com/coyote963/">Github</a>|<a href="http://coyote-and-bird.tumblr.com/" target="blank">Tumblr</a> | <a href="https://twitter.com/CoyoteAndBird1" target="blank">Twitter</a> | <a href="https://plus.google.com/u/3/114696565784178147243/posts" target="blank">Google+</a></p>
-		</div>
-	</footer>	
-	
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Coyote 2016</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
