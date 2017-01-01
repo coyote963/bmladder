@@ -16,9 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
-
 urlpatterns = [
     url(r'^$', views.index, name = "leaderindex"),
     url(r'^(?P<pk>[0-9]+)/$', views.playerview, name = "playerview"),
-    url(r'^graph/$', views.graph, name = "graphtest" ),
+    url(r'^recent/$', views.indexrecent, name="playerviewrecent"),
+    url(r'^graph/$', views.graph, name = "graphtest"),
+    url(r'^dm/$', views.indexdm, name="leaderindexdm"),
+    url(r'^dm/recent/$', views.indexdmrecent, name="leaderindexdmrecent"),
 ]

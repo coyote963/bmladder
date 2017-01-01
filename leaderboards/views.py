@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
 	with connection.cursor() as cursor:
 		try:
-			cursor.execute("SELECT ingamename, rating, player_id, steamid FROM player ORDER BY rating DESC;")
+			cursor.execute("SELECT ingamename, rating, player_id, steamid, active FROM player ORDER BY rating DESC;")
 			allplayers = cursor.fetchall()
 			players = Paginator(allplayers,100)
 			page = request.GET.get('page')
@@ -24,6 +24,65 @@ def index(request):
 	return render(request,
 		'leaderboards/index.html',
 		{'players':playerlist})
+
+def indexrecent(request):
+	with connection.cursor() as cursor:
+		try:
+			cursor.execute("SELECT ingamename, rating, player_id, steamid, active, lastplayed FROM player ORDER BY lastplayed DESC;")
+			allplayers = cursor.fetchall()
+			players = Paginator(allplayers,100)
+			page = request.GET.get('page')
+			try:
+				playerlist = players.page(page)
+			except PageNotAnInteger:
+				playerlist = players.page(1)
+			except EmptyPage:
+				playerlist = players.page(paginator.num_pages)
+		finally:
+			cursor.close()
+	return render(request,
+		'leaderboards/index.html',
+		{'players':playerlist})
+
+def indexdm(request):
+	with connection.cursor() as cursor:
+		try:
+			cursor.execute("SELECT ingamename, rating, player_id, steamid, active FROM playerdm ORDER BY rating DESC;")
+			allplayers = cursor.fetchall()
+			players = Paginator(allplayers,100)
+			page = request.GET.get('page')
+			try:
+				playerlist = players.page(page)
+			except PageNotAnInteger:
+				playerlist = players.page(1)
+			except EmptyPage:
+				playerlist = players.page(paginator.num_pages)
+		finally:
+			cursor.close()
+	return render(request,
+		'leaderboards/index.html',
+		{'players':playerlist})
+
+
+def indexdmrecent(request):
+	with connection.cursor() as cursor:
+		try:
+			cursor.execute("SELECT ingamename, rating, player_id, steamid, active, lastplayed FROM playerdm ORDER BY lastplayed DESC;")
+			allplayers = cursor.fetchall()
+			players = Paginator(allplayers,100)
+			page = request.GET.get('page')
+			try:
+				playerlist = players.page(page)
+			except PageNotAnInteger:
+				playerlist = players.page(1)
+			except EmptyPage:
+				playerlist = players.page(paginator.num_pages)
+		finally:
+			cursor.close()
+	return render(request,
+		'leaderboards/index.html',
+		{'players':playerlist})
+
 def playerview(request, pk):
 	with connection.cursor() as cursor:
 		try:
@@ -41,6 +100,25 @@ def playerview(request, pk):
 		'playername':playerdata.get('ingamename'),
 		'playerrating':playerdata.get('rating'),
 		'pk': int(pk)})
+
+def playerdmview(request, pk):
+	with connection.cursor() as cursor:
+		try:
+			cursor.execute("SELECT killer_name,killer_id, victim_name,victim_id, dateoccurred, weapon, matchup_id FROM matchupdm WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
+				(pk, pk))
+			matchuplist = cursor.fetchall()
+			ratinghistory = playerrating(int(pk))
+			playerdata = playername(pk)
+		finally:
+			cursor.close()
+	return render(request, 
+		'leaderboards/player.html',
+		{'matchuplist':matchuplist,
+		'ratinghistory': ratinghistory,
+		'playername':playerdata.get('ingamename'),
+		'playerrating':playerdata.get('rating'),
+		'pk': int(pk)})
+
 def playerrating(pk):
 	with connection.cursor() as cursor:
 		try:
