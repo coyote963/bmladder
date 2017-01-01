@@ -107,8 +107,8 @@ def playerdmview(request, pk):
 			cursor.execute("SELECT killer_name,killer_id, victim_name,victim_id, dateoccurred, weapon, matchup_id FROM matchupdm WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
 				(pk, pk))
 			matchuplist = cursor.fetchall()
-			ratinghistory = playerrating(int(pk))
-			playerdata = playername(pk)
+			ratinghistory = playerratingdm(int(pk))
+			playerdata = playernamedm(pk)
 		finally:
 			cursor.close()
 	return render(request, 
@@ -118,6 +118,22 @@ def playerdmview(request, pk):
 		'playername':playerdata.get('ingamename'),
 		'playerrating':playerdata.get('rating'),
 		'pk': int(pk)})
+
+def playerratingdm(pk):
+	with connection.cursor() as cursor:
+		try:
+			cursor.execute("SELECT killerrating, dateoccurred FROM matchupdm WHERE killer_id = (%s) ORDER BY dateoccurred DESC",
+				(pk,))
+			ratingincreases = cursor.fetchall()
+			cursor.execute("SELECT victimrating, dateoccurred FROM matchupdm WHERE victim_id = (%s) ORDER BY dateoccurred DESC",
+				(pk,))
+			ratingdecreases = cursor.fetchall()
+		finally:
+			cursor.close()
+			ratinglist = ratingincreases+ratingdecreases
+			ratinglist.sort(key = lambda x: x[1])
+			ratinglist = ratinglist[-100:]
+			return map((lambda x: x[0]), ratinglist)
 
 def playerrating(pk):
 	with connection.cursor() as cursor:
@@ -144,6 +160,14 @@ def playername(pk):
 			return {'ingamename': playerign[0],
 			'rating':playerign[1]}
 	return playerign
+def playernamedm(pk):
+	with connection.cursor() as cursor:
+		cursor.execute("SELECT ingamename,rating FROM dnplayer WHERE player_id = (%s);",
+				(pk,))
+		playerign = cursor.fetchone()
+		if playerign is not None:
+			return {'ingamename': playerign[0],
+			'rating':playerign[1]}
 def graph(request):
 	with connection.cursor() as cursor:
 		cursor.execute("SELECT rating FROM player ORDER BY rating ASC;")
