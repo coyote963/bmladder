@@ -19,6 +19,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name = "leaderindex"),
     url(r'^(?P<pk>[0-9]+)/$', views.playerview, name = "playerview"),
+    url(r'^dm/(?P<pk>[0-9]+)/$', views.playerdmview, name = "playerdmview"),
     url(r'^recent/$', views.indexrecent, name="playerviewrecent"),
     url(r'^graph/$', views.graph, name = "graphtest"),
     url(r'^dm/$', views.indexdm, name="leaderindexdm"),

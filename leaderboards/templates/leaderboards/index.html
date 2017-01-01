@@ -1,11 +1,22 @@
 {% extends "home/header.html" %}
+{% block headercontent %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+	    $("inactiveswitch").click(function(){
+	        $(".inactive").toggle();
+	    });
+	});
+	</script>
+{% endblock %}
 {% load static %}
 {% block content %}
 	<h1> List of players </h1>
 	<div class="row">
-		{% for ingamename, rating, player_id, steamid in players %}
-		<div class="col-sm-6 col-md-4">
-		    <div class="thumbnail">	
+		{% for ingamename, rating, player_id, steamid, active in players %}
+		<div class="col-sm-6 col-md-4 {% if not active %}inactive{% endif %}"
+		{% if not active %}style="display:none;"{% endif %}>
+		    <div class="thumbnail" >	
 		    {% if rating > 1450 %}
       		<img src="{% static "leaderboards/img/God_Slayer.png" %}">
 		    {% elif rating > 1400 %}
@@ -20,7 +31,7 @@
       		<img src="{% static "leaderboards/img/Silver.png" %}">
 		    {% elif rating > 1000 %}
       		<img src="{% static "leaderboards/img/Bronze.png" %}">
-		    {% elif rating > 900 %}
+		    {% else %}
       		<img src="{% static "leaderboards/img/Shit.png" %}">
 		    {% endif %}
 		      <div class="caption">
