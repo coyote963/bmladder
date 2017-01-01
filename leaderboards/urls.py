@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^graph/$', views.graph, name = "graphtest"),
     url(r'^dm/$', views.indexdm, name="leaderindexdm"),
     url(r'^dm/recent/$', views.indexdmrecent, name="leaderindexdmrecent"),
+    url(r'^dm/recent/(?P<pk>[0-9]+)/$', views.playerdmview, name= "recentplayerdmview"),
 ]

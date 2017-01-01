@@ -39,7 +39,7 @@
 		      <div class="caption">
 		        <h3>{{forloop.counter}}. {{ingamename}}</h3>
 		        <p>Rating: {{rating}}</p>
-		        <p><a href="/stats/{{player_id}}/" class="btn btn-primary" role="button">Profile</a> 
+		        <p><a href="{{player_id}}/" class="btn btn-primary" role="button">Profile</a> 
 		        {% if steamid != '-1' %}
 		        <a href="http://steamcommunity.com/profiles/{{steamid}}" class="btn btn-default" role="button">Steam</a>
 		        {% endif %}</p>
