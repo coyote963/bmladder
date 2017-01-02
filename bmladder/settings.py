@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'google_analytics',
 ]
 AUTHENTICATION_BACKENDS = (
     'social.backends.steam.SteamOpenId',

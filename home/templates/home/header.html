@@ -1,3 +1,4 @@
+{% load analytics %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +31,7 @@
 	  mode: "textareas", 
 	  
 	});
+	<
 	</script>
 	{% load static %}
 	<link rel="shortcut icon" type="image/png" href="{% static "home/img/favicon-16x16.png" %}"/>
@@ -118,5 +120,6 @@
             </div>
         </div>
     </footer>
+    {% analytics %}
 </body>
 </html>
