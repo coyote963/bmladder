@@ -1,6 +1,7 @@
 dj-database-url==0.4.1
 Django==1.9
 django-ckeditor==5.0.3
+django-google-analytics==2
 django-messages==0.5.3
 django-tinymce==2.3.0
 easy-thumbnails==2.3

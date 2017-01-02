@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'google_analytics',
+    'analytics',
 ]
 AUTHENTICATION_BACKENDS = (
     'social.backends.steam.SteamOpenId',
@@ -177,3 +177,5 @@ import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+GOOGLE_ANALYTICS_MODEL = True
