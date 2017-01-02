@@ -20,6 +20,7 @@ from django.conf import settings
 from django.contrib import admin
 import django.contrib.auth.views 
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('home.urls')),
@@ -37,4 +38,5 @@ urlpatterns = [
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^stats/', include('leaderboards.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^wakemydyno\.txt$',TemplateView.as_view(template_name='wakemydyno.txt'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
