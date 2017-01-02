@@ -179,3 +179,7 @@ DATABASES['default'] =  dj_database_url.config()
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 GOOGLE_ANALYTICS_MODEL = True
+
+GOOGLE_ANALYTICS = {
+    'google_analytics_id': 'UA-89718130-1',
+}

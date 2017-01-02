@@ -1,4 +1,4 @@
-{% load googleanalytics %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +38,10 @@
 </head>
 
 <body style="padding-top: 70px; background-color:#f6f6f6;background:url(https://cdn.discordapp.com/attachments/263545260309741568/263568260291624960/HUGE_FOREST.png) no-repeat fixed;">
+	{% load google_analytics_tags %}
+	<div style="display:none">
+	    <img src="{% google_analytics %}" width="0" height="0" />
+	</div>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -120,6 +124,6 @@
             </div>
         </div>
     </footer>
-    {% analytics "UA-89718130-1" %}
+    {% google_analytics "UA-89718130-1" %}
 </body>
 </html>
