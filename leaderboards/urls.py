@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/$', views.playerview, name = "playerview"),
     url(r'^dm/(?P<pk>[0-9]+)/$', views.playerdmview, name = "playerdmview"),
     url(r'^recent/$', views.indexrecent, name="playerviewrecent"),
+    url(r'^recent/(?P<pk>[0-9]+)$', views.playerview, name="playerviewrecent"),
     url(r'^graph/$', views.graph, name = "graphtest"),
     url(r'^dm/$', views.indexdm, name="leaderindexdm"),
     url(r'^dm/recent/$', views.indexdmrecent, name="leaderindexdmrecent"),
