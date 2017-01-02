@@ -112,7 +112,7 @@ def playerdmview(request, pk):
 		finally:
 			cursor.close()
 	return render(request, 
-		'leaderboards/player.html',
+		'leaderboards/playerdm.html',
 		{'matchuplist':matchuplist,
 		'ratinghistory': ratinghistory,
 		'playername':playerdata.get('ingamename'),

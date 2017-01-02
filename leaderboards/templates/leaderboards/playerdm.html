@@ -1,0 +1,45 @@
+{% extends "home/header.html" %}
+{% block headercontent %}
+  <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <link href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Oxygen:300' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8">
+{% endblock %}
+{% block content %}
+	<h1>{{playername}} - {{playerrating}}</h1>
+	<div class="ct-chart" id = "chart1"></div>
+	<script>
+	new Chartist.Line('#chart1', {
+		series: [{{ratinghistory}}]
+	}, {
+		width: 900,
+		height: 600,
+		showArea: true,
+		showLine: false,
+		showPoint: false
+	})
+	</script>
+	
+	<table class="table table-hover">
+ 		<thead>
+    		<tr>
+    			<th>Player</th>
+    			<th>Weapon</th>
+    			<th>Date</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	{% for killer_name, killer_id, victim_name, victim_id, dateoccurred, weapon, matchup_id in matchuplist %}
+    		<tr>
+    		{% if pk == killer_id %}
+    		<td class="success"><a href="/stats/dm/{{victim_id}}">{{victim_name}}</a></td>
+    		{% else %}
+    		<td class="danger"><a href="/stats/dm/{{killer_id}}">{{killer_name}}</a></td>
+    		{% endif %}
+    		<td>{{weapon}}</td>
+    		<td>{{dateoccurred}}</td>
+    		</tr>
+    	{% endfor %}
+    	</tbody>
+    </table>
+{% endblock %}
