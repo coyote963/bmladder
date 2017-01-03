@@ -202,7 +202,7 @@ def createfrequency(ratinglist, step):
 
 def searchplayer(request):
 	if request.method == 'POST':
-		search_term = request.GET.get('player_search')
+		search_term = request.POST.get('player_search')
 		tdmplayers = isearch(search_term)
 		return render(request,
 			'leaderboards/searchresults.html',
@@ -210,7 +210,6 @@ def searchplayer(request):
 
 def isearch(search_term):
 	with connection.cursor() as cursor:
-
 		cursor.execute("""
 			SELECT ingamename FROM player
 			WHERE ingamename ILIKE %%(%s)%% 
