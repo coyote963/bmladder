@@ -199,6 +199,7 @@ def createfrequency(ratinglist, step):
 	maximum =  (ratinglist[-1] /step ) *step + step
 	numbins = len(range(minimum, maximum+ step, step))
 	return list(numpy.histogram(ratinglist, numbins)[0])
+
 def searchplayer(request):
 	if request.method == 'POST':
 		search_term = request.GET.get('player_search')
@@ -209,9 +210,10 @@ def searchplayer(request):
 
 def isearch(search_term):
 	with connection.cursor() as cursor:
+
 		cursor.execute("""
 			SELECT ingamename FROM player
-			WHERE ingamename ILIKE %(%s)% 
+			WHERE ingamename ILIKE \%(%s)\% 
 			LIMIT 10;""",
 			(search_term,))
 		players = cursor.fetchall()
