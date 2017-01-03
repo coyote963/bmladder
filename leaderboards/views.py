@@ -199,7 +199,7 @@ def createfrequency(ratinglist, step):
 	maximum =  (ratinglist[-1] /step ) *step + step
 	numbins = len(range(minimum, maximum+ step, step))
 	return list(numpy.histogram(ratinglist, numbins)[0])
-def search(request):
+def searchplayer(request):
 	if request.method == 'GET':
 		search_term = request.GET.get('player_search')
 		tdmplayers = isearch(search_term)
