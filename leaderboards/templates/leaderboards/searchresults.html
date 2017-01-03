@@ -32,7 +32,9 @@
 	</div>
 	{% endfor %}
 	
+	{% if dmplayers %}
 	<h2>Deathmatch Results</h2>
+	{% endif %}
 	{% for ingamename, rating, pk in dmplayers %}
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail" >

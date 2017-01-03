@@ -210,7 +210,8 @@ def searchplayer(request):
 			'leaderboards/searchresults.html',
 			{'tdmplayers':tdmplayers,
 			'dmplayers':dmplayers})
-
+	else:
+		return render(request,'home/home.html')
 def isearch(search_term):
 	with connection.cursor() as cursor:
 		cursor.execute("""
