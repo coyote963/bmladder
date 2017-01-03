@@ -199,3 +199,20 @@ def createfrequency(ratinglist, step):
 	maximum =  (ratinglist[-1] /step ) *step + step
 	numbins = len(range(minimum, maximum+ step, step))
 	return list(numpy.histogram(ratinglist, numbins)[0])
+def search(request):
+	if request.method == 'GET':
+		search_term = request.GET.get('player_search')
+		tdmplayers = isearch(search_term)
+		return render(request,
+			'leaderboards/searchresults.html',
+			{'tdmplayers':tdmplayers,})
+
+def isearch(search_term):
+	with connection.cursor() as cursor:
+		cursor.execute("""
+			SELECT ingamename FROM player
+			WHERE ingamename ILIKE '%(%s)% 
+			LIMIT 10;""",
+			(search_term,))
+		players = cursor.fetchall()
+	return players
