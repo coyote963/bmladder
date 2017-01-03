@@ -203,7 +203,7 @@ def createfrequency(ratinglist, step):
 def searchplayer(request):
 	if request.method == 'POST':
 		search_term = request.POST.get('player_search')
-		players = isearch(search_term).get('players')
+		players = isearch(search_term)
 		dmplayers = players.get('dmplayers')
 		tdmplayers = players.get('tdmplayers')
 		return render(request,
