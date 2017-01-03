@@ -212,6 +212,7 @@ def isearch(search_term):
 	with connection.cursor() as cursor:
 		cursor.execute("""
 			SELECT ingamename FROM player
-			WHERE ingamename ILIKE '%kus%'""")
+			WHERE ingamename ILIKE '%%(%s)%%'""",
+			(search_term,))
 		players = cursor.fetchall()
 	return players
