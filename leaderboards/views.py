@@ -214,12 +214,12 @@ def searchplayer(request):
 def isearch(search_term):
 	with connection.cursor() as cursor:
 		cursor.execute("""
-			SELECT ingamename, rating, pk FROM player
+			SELECT ingamename, rating, player_id FROM player
 			WHERE ingamename ILIKE '%%' || %s || '%%'
 			LIMIT 15""",
 			(search_term,))
 		players = cursor.fetchall()
-		cursor.execute("""SELECT ingamename,rating, pk FROM dmplayer
+		cursor.execute("""SELECT ingamename,rating, dmplayer_id FROM dmplayer
 			WHERE ingamename ILIKE '%%' || %s || '%%'
 			LIMIT 15""",
 			(search_term,))
