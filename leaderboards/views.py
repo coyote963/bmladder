@@ -205,7 +205,7 @@ def searchplayer(request):
 		search_term = request.POST.get('player_search')
 		players = isearch(search_term)
 		dmplayers = players.get('dmplayers')
-		tdmplayers = players.get('tdmplayers')
+		tdmplayers = players.get('players')
 		return render(request,
 			'leaderboards/searchresults.html',
 			{'tdmplayers':tdmplayers,
