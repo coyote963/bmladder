@@ -1,11 +1,12 @@
 {% extends "home/header.html" %}
 {% block content %}
+{% load static %}
 	<h1>Search results</h1>
 	<h2>TDM results</h2>
 	{% for ingamename, rating, pk in tdmplayers %}
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail" >
-		<a href="/stats/{{pk}}">	
+		<a href="/stats/{{pk}}/">	
 	    {% if rating > 1450 %}
 			<img src="{% static "leaderboards/img/God_Slayer.png" %}">
 	    {% elif rating > 1400 %}
@@ -34,7 +35,7 @@
 		<p>{{ingamename | safe}}</p>
 		<div class="col-sm-6 col-md-4">
 		<div class="thumbnail" >
-		<a href="/stats/dm/{{pk}}">	
+		<a href="/stats/dm/{{pk}}/">	
 	    {% if rating > 1450 %}
 			<img src="{% static "leaderboards/img/God_Slayer.png" %}">
 	    {% elif rating > 1400 %}
