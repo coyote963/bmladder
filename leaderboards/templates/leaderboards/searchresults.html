@@ -6,54 +6,55 @@
 	{% for ingamename, rating, pk in tdmplayers %}
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail" >
-		<a href="/stats/{{pk}}/">	
-	    {% if rating > 1450 %}
-			<img src="{% static "leaderboards/img/God_Slayer.png" %}">
-	    {% elif rating > 1400 %}
-			<img src="{% static "leaderboards/img/Elite.png" %}">
-	    {% elif rating > 1350 %}
-			<img src="{% static "leaderboards/img/Platinum.png" %}">
+			<a href="/stats/{{pk}}/">
+		    {% if rating > 1450 %}
+				<img src="{% static "leaderboards/img/God_Slayer.png" %}">
+		    {% elif rating > 1400 %}
+				<img src="{% static "leaderboards/img/Elite.png" %}">
+		    {% elif rating > 1350 %}
+				<img src="{% static "leaderboards/img/Platinum.png" %}">
 			{% elif rating > 1275 %}
-			<img src="{% static "leaderboards/img/Diamond.png" %}">
-	    {% elif rating > 1200 %}
-			<img src="{% static "leaderboards/img/Gold.png" %}">
-	    {% elif rating > 1100 %}
-			<img src="{% static "leaderboards/img/Silver.png" %}">
-	    {% elif rating > 1000 %}
-			<img src="{% static "leaderboards/img/Bronze.png" %}">
-	    {% else %}
-			<img src="{% static "leaderboards/img/Shit.png" %}">
-		{% endif %}
-		</a>
-		<div class="caption">
-			<h2>{{ingamename|safe}}</h2>
+				<img src="{% static "leaderboards/img/Diamond.png" %}">
+			{% elif rating > 1200 %}
+				<img src="{% static "leaderboards/img/Gold.png" %}">
+		    {% elif rating > 1100 %}
+				<img src="{% static "leaderboards/img/Silver.png" %}">
+		    {% elif rating > 1000 %}
+				<img src="{% static "leaderboards/img/Bronze.png" %}">
+		    {% else %}
+				<img src="{% static "leaderboards/img/Shit.png" %}">
+			{% endif %}
+			</a>
+			<div class="caption">
+				<h2>{{ingamename|safe}}</h2>
+			</div>
 		</div>
 	</div>
 	{% endfor %}
 	<h2>Deathmatch Results</h2>
 	{% for ingamename, rating, pk in dmplayers %}
-		<p>{{ingamename | safe}}</p>
-		<div class="col-sm-6 col-md-4">
+	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail" >
-		<a href="/stats/dm/{{pk}}/">	
-	    {% if rating > 1450 %}
-			<img src="{% static "leaderboards/img/God_Slayer.png" %}">
-	    {% elif rating > 1400 %}
-			<img src="{% static "leaderboards/img/Elite.png" %}">
-	    {% elif rating > 1350 %}
-			<img src="{% static "leaderboards/img/Platinum.png" %}">
-			{% elif rating > 1275 %}
-			<img src="{% static "leaderboards/img/Diamond.png" %}">
-	    {% elif rating > 1200 %}
-			<img src="{% static "leaderboards/img/Gold.png" %}">
-	    {% elif rating > 1100 %}
-			<img src="{% static "leaderboards/img/Silver.png" %}">
-	    {% elif rating > 1000 %}
-			<img src="{% static "leaderboards/img/Bronze.png" %}">
-	    {% else %}
-			<img src="{% static "leaderboards/img/Shit.png" %}">
-		{% endif %}
-		</a>
+			<p>{{ingamename | safe}}</p>
+				<a href="/stats/dm/{{pk}}/">	
+			    {% if rating > 1450 %}
+					<img src="{% static "leaderboards/img/God_Slayer.png" %}">
+			    {% elif rating > 1400 %}
+					<img src="{% static "leaderboards/img/Elite.png" %}">
+			    {% elif rating > 1350 %}
+					<img src="{% static "leaderboards/img/Platinum.png" %}">
+				{% elif rating > 1275 %}
+					<img src="{% static "leaderboards/img/Diamond.png" %}">
+			    {% elif rating > 1200 %}
+					<img src="{% static "leaderboards/img/Gold.png" %}">
+			    {% elif rating > 1100 %}
+					<img src="{% static "leaderboards/img/Silver.png" %}">
+			    {% elif rating > 1000 %}
+					<img src="{% static "leaderboards/img/Bronze.png" %}">
+			    {% else %}
+					<img src="{% static "leaderboards/img/Shit.png" %}">
+				{% endif %}
+				</a>
 		<div class="caption">
 			<h2>{{ingamename|safe}}</h2>
 		</div>
