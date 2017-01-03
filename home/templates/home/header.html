@@ -82,7 +82,13 @@
 					<a href='/ladder/'>Ladder Tournament</a>
 				</li>
 			</ul>
-				
+			<ul class="nav navbar-nav navbar-right">
+				<li><form action="/search/" method="post">
+					<label for="player_search">Search Players</label>
+					<input id="player_search" type="text" name="player_search">
+					<input type="submit" value="search"></form>
+				</li>
+			</ul>
 			{% if not user.is_authenticated %}
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href='/login/'>Login</a></li>
