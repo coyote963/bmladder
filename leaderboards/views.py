@@ -5,6 +5,7 @@ import json
 import numpy
 from collections import Counter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse, HttpResponseNotFound
 # Create your views here.
 def index(request):
 	with connection.cursor() as cursor:
@@ -89,6 +90,8 @@ def playerview(request, pk):
 			cursor.execute("SELECT killer_name,killer_id, victim_name,victim_id, dateoccurred, weapon, matchup_id FROM matchup WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
 				(pk, pk))
 			matchuplist = cursor.fetchall()
+			if not matchuplist:
+				return HttpResponseNotFound('<h1>Page not found</h1>')
 			ratinghistory = playerrating(int(pk))
 			playerdata = playername(pk)
 			if playerdata.get('steamid') != '-1':
@@ -113,10 +116,12 @@ def playerdmview(request, pk):
 			cursor.execute("SELECT killer_name,killer_id, victim_name,victim_id, dateoccurred, weapon, matchup_id FROM dmmatchup WHERE killer_id = (%s) OR victim_id = (%s) ORDER BY dateoccurred DESC;",
 				(pk, pk))
 			matchuplist = cursor.fetchall()
+			if not matchuplist:
+				return HttpResponseNotFound('<h1>Page not found</h1>')
 			ratinghistory = playerratingdm(int(pk))
 			playerdata = playernamedm(pk)
 			if playerdata.get('steamid') != '-1':
-				alts = get_alts(pk,playerdata.get('steamid'))
+				alts = get_altsdm(pk,playerdata.get('steamid'))
 			else:
 				alts = None
 		finally:
