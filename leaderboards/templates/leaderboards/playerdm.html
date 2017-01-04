@@ -15,7 +15,9 @@
 {% endblock %}
 {% block content %}
     {% load static %}
-    <button type="button" class="btn btn-primary btn-block altswitch">Show Alternate Accounts</button> 
+    {% if alts %}
+    <button type="button" class="btn btn-primary btn-block altswitch">Show Alternate Accounts</button>
+    {% endif %} 
 	<h1>{{playername}} - {{playerrating}}</h1>
     <div class = "panel panel-default">
         <div class = "panel-heading">{{playername}}'s Stats</div>
@@ -52,7 +54,8 @@
                 <td><a href='/stats/dm/{{player_id}}'>{{ingamename}}</a></td>
                 <td>{{rating}}</td>
             </tr>
-            {% endfor %}    
+            {% endfor %}
+            {% endif %}
         </table>
     </div>
 
