@@ -91,6 +91,7 @@ def playerview(request, pk):
 			matchuplist = cursor.fetchall()
 			ratinghistory = playerrating(int(pk))
 			playerdata = playername(pk)
+			alts = get_alts(playerdata.get('steamid'))
 		finally:
 			cursor.close()
 	return render(request, 
@@ -99,7 +100,9 @@ def playerview(request, pk):
 		'ratinghistory': ratinghistory,
 		'playername':playerdata.get('ingamename'),
 		'playerrating':playerdata.get('rating'),
-		'pk': int(pk)})
+		'playersteam':playerdata.get('steamid'),
+		'pk': int(pk),
+		'alts' :alts})
 
 def playerdmview(request, pk):
 	with connection.cursor() as cursor:
@@ -109,6 +112,7 @@ def playerdmview(request, pk):
 			matchuplist = cursor.fetchall()
 			ratinghistory = playerratingdm(int(pk))
 			playerdata = playernamedm(pk)
+			alts = get_alts(playerdata.get('steamid'))
 		finally:
 			cursor.close()
 	return render(request, 
@@ -117,7 +121,9 @@ def playerdmview(request, pk):
 		'ratinghistory': ratinghistory,
 		'playername':playerdata.get('ingamename'),
 		'playerrating':playerdata.get('rating'),
-		'pk': int(pk)})
+		'playersteam':playerdata.get('steamid'),
+		'pk': int(pk),
+		'alts': alts})
 
 def playerratingdm(pk):
 	with connection.cursor() as cursor:
@@ -150,24 +156,37 @@ def playerrating(pk):
 			ratinglist.sort(key = lambda x: x[1])
 			ratinglist = ratinglist[-100:]
 			return map((lambda x: x[0]), ratinglist)
-
+def get_alts(steamid):
+	cur.execute("""
+		SELECT ingamename, rating, player_id 
+		FROM player WHERE steamid = (%s);
+		""",(steamid,))
+	return cur.fetchall()
+def get_altsdm(steamid):
+	cur.execute("""
+		SELECT ingamename, rating, player_id 
+		FROM dmplayer WHERE steamid = (%s);
+		""",(steamid,))
+	return cur.fetchall()
 def playername(pk):
 	with connection.cursor() as cursor:
-		cursor.execute("SELECT ingamename,rating FROM player WHERE player_id = (%s);",
+		cursor.execute("SELECT ingamename,rating, steamid FROM player WHERE player_id = (%s);",
 				(pk,))
 		playerign = cursor.fetchone()
 		if playerign is not None:
 			return {'ingamename': playerign[0],
-			'rating':playerign[1]}
+			'rating':playerign[1],
+			'steamid':playerign[2]}
 	return playerign
 def playernamedm(pk):
 	with connection.cursor() as cursor:
-		cursor.execute("SELECT ingamename,rating FROM dmplayer WHERE player_id = (%s);",
+		cursor.execute("SELECT ingamename,rating, steamid FROM dmplayer WHERE player_id = (%s);",
 				(pk,))
 		playerign = cursor.fetchone()
 		if playerign is not None:
 			return {'ingamename': playerign[0],
-			'rating':playerign[1]}
+			'rating':playerign[1],
+			'steamid':playerign[2]}
 def graph(request):
 	with connection.cursor() as cursor:
 		cursor.execute("SELECT rating FROM player ORDER BY rating ASC;")
