@@ -22,7 +22,7 @@
     <div class = "panel panel-default">
         <div class = "panel-heading">{{playername}}'s Stats</div>
         <table class = "table">
-            {% if playersteam != '-1' %}<tr><td><a href= "http://steamcommunity.com/profiles/{{playersteam}}">"https:Steam Account</a></td></tr>{% endif %}
+            {% if playersteam != '-1' %}<tr><td><a href= "http://steamcommunity.com/profiles/{{playersteam}}">Steam Account</a></td></tr>{% endif %}
             <tr><td>
             {% if rating > 1450 %}
             <img src="{% static "leaderboards/img/God_Slayer.png" %}">
