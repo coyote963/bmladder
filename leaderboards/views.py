@@ -91,7 +91,7 @@ def playerview(request, pk):
 			matchuplist = cursor.fetchall()
 			ratinghistory = playerrating(int(pk))
 			playerdata = playername(pk)
-			if playerdata.get('steamid') != -1:
+			if playerdata.get('steamid') != '-1':
 				alts = get_alts(pk,playerdata.get('steamid'))
 			else:
 				alts = None
@@ -115,7 +115,7 @@ def playerdmview(request, pk):
 			matchuplist = cursor.fetchall()
 			ratinghistory = playerratingdm(int(pk))
 			playerdata = playernamedm(pk)
-			if playerdata.get('steamid') != -1:
+			if playerdata.get('steamid') != '-1':
 				alts = get_alts(pk,playerdata.get('steamid'))
 			else:
 				alts = None
