@@ -19,7 +19,7 @@
     <div class = "panel panel-default">
         <div class = "panel-heading">{{playername}}'s Stats</div>
         <table class = "table">
-            {% if playersteam != '-1' %}<tr><td><a href= "http://steamcommunity.com/profiles/{{steamid}}">"https:Steam Account</a></td></tr>{% endif %}
+            {% if playersteam != '-1' %}<tr><td><a href= "http://steamcommunity.com/profiles/{{playersteam}}">"https:Steam Account</a></td></tr>{% endif %}
             <tr><td>
             {% if rating > 1450 %}
             <img src="{% static "leaderboards/img/God_Slayer.png" %}">
@@ -38,7 +38,20 @@
             {% else %}
             <img src="{% static "leaderboards/img/Shit.png" %}">
             {% endif %}
-            </td></tr>
+            </td></tr> 
+        </table>
+        <table class="table alt" style="display:none;">
+            {% if alts %}
+            <tr>
+                <th>Name</th>
+                <th>Rating</th>
+            </tr>
+            {% for ingamename, rating, player_id in alts %}
+            <tr>
+                <td><a href='/stats/dm/{{player_id}}'>{{ingamename}}</a></td>
+                <td>{{rating}}</td>
+            </tr>
+            {% endfor %}    
         </table>
     </div>
 
