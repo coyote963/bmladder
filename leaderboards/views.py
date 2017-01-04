@@ -166,14 +166,14 @@ def get_alts(pk, steamid):
 	with connection.cursor() as cur:
 		cur.execute("""
 			SELECT ingamename, rating, player_id 
-			FROM player WHERE steamid = (%s) AND player_key != (%s);;
+			FROM player WHERE steamid = (%s) AND player_id != (%s);;
 			""",(steamid, pk))
 		return cur.fetchall()
 def get_altsdm(pk,steamid):
 	with connection.cursor() as cur:
 		cur.execute("""
 			SELECT ingamename, rating, player_id 
-			FROM dmplayer WHERE steamid = (%s) AND player_key != (%s);
+			FROM dmplayer WHERE steamid = (%s) AND player_id != (%s);
 			""",(steamid,pk))
 		return cur.fetchall()
 def playername(pk):
