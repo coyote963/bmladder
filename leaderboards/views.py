@@ -157,17 +157,19 @@ def playerrating(pk):
 			ratinglist = ratinglist[-100:]
 			return map((lambda x: x[0]), ratinglist)
 def get_alts(steamid):
-	cur.execute("""
-		SELECT ingamename, rating, player_id 
-		FROM player WHERE steamid = (%s);
-		""",(steamid,))
-	return cur.fetchall()
+	with connection.cursor() as cur:
+		cur.execute("""
+			SELECT ingamename, rating, player_id 
+			FROM player WHERE steamid = (%s);
+			""",(steamid,))
+		return cur.fetchall()
 def get_altsdm(steamid):
-	cur.execute("""
-		SELECT ingamename, rating, player_id 
-		FROM dmplayer WHERE steamid = (%s);
-		""",(steamid,))
-	return cur.fetchall()
+	with connection.cursor() as cur
+		cur.execute("""
+			SELECT ingamename, rating, player_id 
+			FROM dmplayer WHERE steamid = (%s);
+			""",(steamid,))
+		return cur.fetchall()
 def playername(pk):
 	with connection.cursor() as cursor:
 		cursor.execute("SELECT ingamename,rating, steamid FROM player WHERE player_id = (%s);",
