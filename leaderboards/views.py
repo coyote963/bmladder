@@ -92,7 +92,7 @@ def playerview(request, pk):
 			ratinghistory = playerrating(int(pk))
 			playerdata = playername(pk)
 			if playerdata.get('steamid') != -1:
-				alts = get_alts(playerdata.get('steamid'))
+				alts = get_alts(pk,playerdata.get('steamid'))
 			else:
 				alts = None
 		finally:
@@ -116,7 +116,7 @@ def playerdmview(request, pk):
 			ratinghistory = playerratingdm(int(pk))
 			playerdata = playernamedm(pk)
 			if playerdata.get('steamid') != -1:
-				alts = get_alts(playerdata.get('steamid'))
+				alts = get_alts(pk,playerdata.get('steamid'))
 			else:
 				alts = None
 		finally:
@@ -162,19 +162,19 @@ def playerrating(pk):
 			ratinglist.sort(key = lambda x: x[1])
 			ratinglist = ratinglist[-100:]
 			return map((lambda x: x[0]), ratinglist)
-def get_alts(steamid):
+def get_alts(pk, steamid):
 	with connection.cursor() as cur:
 		cur.execute("""
 			SELECT ingamename, rating, player_id 
-			FROM player WHERE steamid = (%s);
-			""",(steamid,))
+			FROM player WHERE steamid = (%s) AND player_key != (%s);;
+			""",(steamid, pk))
 		return cur.fetchall()
-def get_altsdm(steamid):
+def get_altsdm(pk,steamid):
 	with connection.cursor() as cur:
 		cur.execute("""
 			SELECT ingamename, rating, player_id 
-			FROM dmplayer WHERE steamid = (%s);
-			""",(steamid,))
+			FROM dmplayer WHERE steamid = (%s) AND player_key != (%s);
+			""",(steamid,pk))
 		return cur.fetchall()
 def playername(pk):
 	with connection.cursor() as cursor:
