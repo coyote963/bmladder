@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+
 
 ALLOWED_HOSTS = []
 
@@ -170,8 +170,6 @@ REDACTOR_OPTIONS = {'lang': 'en'}
 REDACTOR_UPLOAD = 'uploads/'
 
 LOGIN_URL = '/accounts/login/'
-
-DEBUG = True
 
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
